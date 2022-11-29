@@ -121,7 +121,7 @@ export default function Footer({ menuItems }) {
         <div className={cx('copyright')}>
           &copy; {new Date().getFullYear()} Blueprint Media &#183; Powered By{' '}
           <a href="https://wpengine.com/atlas">Atlas</a>
-        </div><br />...
+        </div>
       </div>
     </footer>
   );
