@@ -1,4 +1,4 @@
-import styles from './Gravityforms.module.scss';
+import styles from './GravityForms.module.scss';
 
 export default function Gravityforms({ formContent, postContent }) {
   if ( ! formContent && ! postContent ) {
