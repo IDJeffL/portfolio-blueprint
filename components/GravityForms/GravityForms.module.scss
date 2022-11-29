@@ -1,0 +1,61 @@
+@import 'styles/Variables';
+
+.gfField {
+  border: 1px solid #555;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.gfFieldLabel {
+  font-weight: bold;
+}
+
+.gfFieldCheckbox {
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.gfFieldCheckbox li {
+  margin-bottom: 0;
+}
+
+.gfFieldError {
+  color: red;
+}
+
+.gfFieldRequired i {
+  font-size: 12px;
+  font-weight: normal; 
+}
+
+.gfSubmitForm {
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #4CAF50 !important; 
+  color: white;
+  cursor: pointer;
+}
+
+.gfSubmitForm:hover {
+  background-color: #04AA6D !important;
+}
+
+.gfFormSent {
+  background-color: green;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 5px;
+  display: none;
+}
+
+.gfFormSubmitted {
+  font-weight: bold;
+  font-style: italic;
+}
+
+
