@@ -1,0 +1,59 @@
+{
+  "polyfillFiles": [
+    "static/chunks/polyfills-c67a75d1b6f99dc8.js"
+  ],
+  "devFiles": [],
+  "ampDevFiles": [],
+  "lowPriorityFiles": [
+    "static/a0fTNn4M4HL0Tt0aXI8qA/_buildManifest.js",
+    "static/a0fTNn4M4HL0Tt0aXI8qA/_ssgManifest.js"
+  ],
+  "rootMainFiles": [],
+  "pages": {
+    "/": [
+      "static/chunks/webpack-42cdea76c8170223.js",
+      "static/chunks/framework-5f4595e5518b5600.js",
+      "static/chunks/main-1cbec97e752abe67.js",
+      "static/chunks/pages/index-a98a1718fc3b3d2c.js"
+    ],
+    "/[...wordpressNode]": [
+      "static/chunks/webpack-42cdea76c8170223.js",
+      "static/chunks/framework-5f4595e5518b5600.js",
+      "static/chunks/main-1cbec97e752abe67.js",
+      "static/chunks/pages/[...wordpressNode]-882ad8ebb045d9b6.js"
+    ],
+    "/_app": [
+      "static/chunks/webpack-42cdea76c8170223.js",
+      "static/chunks/framework-5f4595e5518b5600.js",
+      "static/chunks/main-1cbec97e752abe67.js",
+      "static/css/f04a952117b0ea96.css",
+      "static/chunks/pages/_app-03c4ff057687588e.js"
+    ],
+    "/_error": [
+      "static/chunks/webpack-42cdea76c8170223.js",
+      "static/chunks/framework-5f4595e5518b5600.js",
+      "static/chunks/main-1cbec97e752abe67.js",
+      "static/chunks/pages/_error-a4ba2246ff8fb532.js"
+    ],
+    "/posts": [
+      "static/chunks/webpack-42cdea76c8170223.js",
+      "static/chunks/framework-5f4595e5518b5600.js",
+      "static/chunks/main-1cbec97e752abe67.js",
+      "static/chunks/pages/posts-bdefa3f994c3d5ea.js"
+    ],
+    "/preview": [
+      "static/chunks/webpack-42cdea76c8170223.js",
+      "static/chunks/framework-5f4595e5518b5600.js",
+      "static/chunks/main-1cbec97e752abe67.js",
+      "static/chunks/pages/preview-6239248aeb35e9d5.js"
+    ],
+    "/search": [
+      "static/chunks/webpack-42cdea76c8170223.js",
+      "static/chunks/framework-5f4595e5518b5600.js",
+      "static/chunks/main-1cbec97e752abe67.js",
+      "static/css/bb0c67d176a4b76b.css",
+      "static/chunks/pages/search-166fe8255a9087d2.js"
+    ]
+  },
+  "ampFirstPages": []
+}

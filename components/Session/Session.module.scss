@@ -1,0 +1,16 @@
+@import 'styles/Variables';
+
+.wpUserStatusMenu {
+  float: right;
+  margin-bottom: 20px !important;
+  margin-right: 20px;
+}
+
+.wpUserStatusMenu a {
+  color: white;
+  font-size: 12px;
+}
+
+.wpUserLogoutLink{
+  cursor: pointer;
+}

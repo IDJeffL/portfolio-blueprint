@@ -1,0 +1,13 @@
+{
+  "/api/faust/[[...route]]": "pages/api/faust/[[...route]].js",
+  "/_app": "pages/_app.js",
+  "/": "pages/index.js",
+  "/[...wordpressNode]": "pages/[...wordpressNode].js",
+  "/_error": "pages/_error.js",
+  "/posts": "pages/posts.js",
+  "/_document": "pages/_document.js",
+  "/search": "pages/search.js",
+  "/en/404": "pages/en/404.html",
+  "/en/500": "pages/en/500.html",
+  "/en/preview": "pages/en/preview.html"
+}

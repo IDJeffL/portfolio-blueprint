@@ -1,0 +1,37 @@
+@import 'styles/Variables';
+
+.wpRegisterField {
+  border: 1px solid #555;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.wpRegisterFieldLabel {
+  font-weight: bold;
+}
+
+.wpRegisterSubmitForm {
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #4CAF50 !important; 
+  color: white;
+  cursor: pointer;
+}
+
+.wpRegisterSubmitForm:hover {
+  background-color: #04AA6D !important;
+}
+
+.wpRegisterFormSubmitted {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.wpRegisterError {
+  color: red;
+}
+
