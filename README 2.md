@@ -11,5 +11,3 @@ For more information on this Blueprint please check out the following sources:
 - [WPGraphQL](https://www.wpgraphql.com)
 - [Atlas Content Modeler](https://wordpress.org/plugins/atlas-content-modeler/)
 - [WP Engine's Atlas developer community](https://developers.wpengine.com)
-
-...
