@@ -1,0 +1,19 @@
+name: 'Update: hdxj0sc18jcxck49ro00bhabk.js.wpenginepowered.com'
+on:
+  push:
+    branches: master
+  repository_dispatch:
+    types: [Push Update Live] 
+jobs:
+  build-and-deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Update GitHub Profile README ( received Site Update request )
+      uses: theboi/github-update-readme@v1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        header: "This is the header ..."
+        subhead: "This is the sub-heading ..."
+        footer: "And this is the footer ..."
