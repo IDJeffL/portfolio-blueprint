@@ -5,7 +5,7 @@ on:
   repository_dispatch:
     types: [Push Update Live] 
 jobs:
-  build-and-deploy:
+ workflow_dispatch:
     name: Build and deploy
     runs-on: ubuntu-latest
     steps:
