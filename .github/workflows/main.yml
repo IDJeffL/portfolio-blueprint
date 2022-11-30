@@ -14,5 +14,5 @@ jobs:
     steps:
     - uses: "finnp/create-file-action@master"
       env:
-        FILE_NAME: "main/portfolio-blueprint/info.txt"
+        FILE_NAME: "/home/runner/work/portfolio-blueprint/portfolio-blueprint/info.txt"
         FILE_DATA: "file content"
