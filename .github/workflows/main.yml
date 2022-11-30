@@ -32,14 +32,5 @@ jobs:
           LEVEL: ${{ inputs.logLevel }}
           TAGS: ${{ inputs.tags }}
           ENVIRONMENT: ${{ inputs.environment }}
-      - name: Update GitHub Profile README ( received Site Update request )
-        uses: theboi/github-update-readme@v1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          header: "This is the header ..."
-          subhead: "This is the sub-heading ..."
-          footer: "And this is the footer ..."
-          
 
 
