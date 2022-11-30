@@ -2,8 +2,10 @@ name: render readme
 
 # Controls when the action will run
 on:
+  repository_dispatch:
+    types: [push-live] 
   push:
-    branches: master
+    branches: main   
 
 jobs:
   render:
