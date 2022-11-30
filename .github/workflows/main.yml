@@ -11,16 +11,12 @@ jobs:
   summarize:
     name: Update README.md and api.json
     runs-on: ubuntu-latest
-    # Don't run this workflow when [skip ci] is passed
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          # Fetch full history to figure out created date
-          fetch-depth: 0
-      - name: Update note summary
-        uses: AnandChowdhary/notes-summary@HEAD
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          directory: "notes"
+    - name: Update GitHub Profile README
+      uses: theboi/github-update-readme@v1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        header: "Hey, I'm Ryan! 👋"
+        subhead: "Currently a student in Singapore, passionate about creating all-things-tech to improve society."
+        footer: "**Learn more about me at [ryanthe.com](https://www.ryanthe.com)!**"
