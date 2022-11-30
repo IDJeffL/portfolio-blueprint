@@ -8,24 +8,23 @@ on:
     branches: main   
 
 jobs:
-  publish:
+  build:
+    name: Create Release
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Generate README.md
-      uses: probablykasper/readme-template-action@v1
-      with:
-        token: ${{ secrets.README_TEMPLATE_TOKEN }}
-        template: TEMPLATE.md
-        output: README.md
-    - name: Update README.md
-      run: |
-        if [[ "$(git status --porcelain)" != "" ]]; then
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          git add .
-          git commit -m "Auto-update README.md"
-          git push
-        fi
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
