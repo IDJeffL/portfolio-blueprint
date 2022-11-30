@@ -12,11 +12,7 @@ jobs:
     name: Update README.md and api.json
     runs-on: ubuntu-latest
     steps:
-    - name: Update GitHub Profile README
-      uses: theboi/github-update-readme@v1.0
+    - uses: "finnp/create-file-action@master"
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        header: "Hey, I'm Ryan! 👋"
-        subhead: "Currently a student in Singapore, passionate about creating all-things-tech to improve society."
-        footer: "**Learn more about me at [ryanthe.com](https://www.ryanthe.com)!**"
+        FILE_NAME: "dir/fileName.txt"
+        FILE_DATA: "file content"
