@@ -1,7 +1,5 @@
 name: 'Push Live: hdxj0sc18jcxck49ro00bhabk.js.wpenginepowered.com'
 on:
-  push:
-    branches: main
   repository_dispatch:
     types: [Push Live] 
 jobs:
