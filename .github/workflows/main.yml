@@ -1,19 +1,45 @@
 name: 'Update: hdxj0sc18jcxck49ro00bhabk.js.wpenginepowered.com'
 on:
-  push:
-    branches: master
-  repository_dispatch:
-    types: [Push Update Live] 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+      tags:
+        description: 'Test scenario tags'
+        required: false
+        type: boolean
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
+
 jobs:
- workflow_dispatch:
-    name: Build and deploy
+  log-the-inputs:
     runs-on: ubuntu-latest
     steps:
-    - name: Update GitHub Profile README ( received Site Update request )
-      uses: theboi/github-update-readme@v1.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        header: "This is the header ..."
-        subhead: "This is the sub-heading ..."
-        footer: "And this is the footer ..."
+      - run: |
+          echo "Log level: $LEVEL"
+          echo "Tags: $TAGS"
+          echo "Environment: $ENVIRONMENT"
+        env:
+          LEVEL: ${{ inputs.logLevel }}
+          TAGS: ${{ inputs.tags }}
+          ENVIRONMENT: ${{ inputs.environment }}
+      - name: Update GitHub Profile README ( received Site Update request )
+        uses: theboi/github-update-readme@v1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          header: "This is the header ..."
+          subhead: "This is the sub-heading ..."
+          footer: "And this is the footer ..."
+          
+
+
