@@ -6,5 +6,3 @@ jobs:
   build-and-deploy:
     name: Build and deploy
     runs-on: ubuntu-latest
-    steps:
-    - name: Update GitHub
