@@ -8,25 +8,14 @@ on:
     branches: main   
 
 jobs:
-  render:
-    # The type of runner that the job will run on
-    runs-on: macOS-latest
-
+  update_templates:
+    name: "Update Templates"
+    runs-on: ubuntu-latest
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-    - uses: r-lib/actions/setup-r@v1
-    - uses: r-lib/actions/setup-pandoc@v1
+    - name: "📥  Fetching Repository Contents"
+      uses: actions/checkout@main
 
-    # install packages needed
-    - name: install required packages
-      run: Rscript -e 'install.packages(c("rmarkdown","gratia"))'
-
-    # Render READEME.md using rmarkdown
-    - name: render README
-      run: Rscript -e 'rmarkdown::render("README.md", output_format = "md_document")'
-
-    - name: commit rendered README
+    - name: update README
       run: |
         git add README.md man/figures/README-*
         git commit -m "Re-build README.md" || echo "No changes to commit"
