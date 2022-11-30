@@ -14,11 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-
+        with:
+          node-version: '16'
+          
       - name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
         with:
-          node-version: '16'
           path: main/info.txt
           write-mode: preserve 
           contents: |
@@ -41,8 +42,9 @@ jobs:
       - name: Commit & Push
         uses: Andro999b/push@v1.3
         with:
-          node-version: '16'
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
           force: true
           message: 'Overwritten by Github Actions - ${date}'
+          
+      - uses: stefanzweifel/git-auto-commit-action@v4
