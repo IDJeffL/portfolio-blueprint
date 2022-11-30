@@ -1,7 +1,7 @@
 name: 'Push Live: hdxj0sc18jcxck49ro00bhabk.js.wpenginepowered.com'
 on:
   repository_dispatch:
-    types: [Push Live] 
+    types: [push-live] 
 jobs:
   build-and-deploy:
     name: Build and deploy
