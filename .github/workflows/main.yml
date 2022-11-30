@@ -8,23 +8,19 @@ on:
     branches: main   
 
 jobs:
-  build:
-    name: Create Release
+  summarize:
+    name: Update README.md and api.json
     runs-on: ubuntu-latest
+    # Don't run this workflow when [skip ci] is passed
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
+          # Fetch full history to figure out created date
+          fetch-depth: 0
+      - name: Update note summary
+        uses: AnandChowdhary/notes-summary@HEAD
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          directory: "notes"
