@@ -1,36 +1,19 @@
-name: 'Update: hdxj0sc18jcxck49ro00bhabk.js.wpenginepowered.com'
+name: 'Push Live: hdxj0sc18jcxck49ro00bhabk.js.wpenginepowered.com'
 on:
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-        type: choice
-        options:
-        - info
-        - warning
-        - debug
-      tags:
-        description: 'Test scenario tags'
-        required: false
-        type: boolean
-      environment:
-        description: 'Environment to run tests against'
-        type: environment
-        required: true
-
+  push:
+    branches: master
+  repository_dispatch:
+    types: [Push Live] 
 jobs:
-  log-the-inputs:
+  build-and-deploy:
+    name: Build and deploy
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "Log level: $LEVEL"
-          echo "Tags: $TAGS"
-          echo "Environment: $ENVIRONMENT"
-        env:
-          LEVEL: ${{ inputs.logLevel }}
-          TAGS: ${{ inputs.tags }}
-          ENVIRONMENT: ${{ inputs.environment }}
-
-
+    - name: Update GitHub Profile README
+      uses: theboi/github-update-readme@v1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        header: "Hey, I'm Ryan! 👋"
+        subhead: "Currently a student in Singapore, passionate about creating all-things-tech to improve society."
+        footer: "**Learn more about me at [ryanthe.com](https://www.ryanthe.com)!**"
