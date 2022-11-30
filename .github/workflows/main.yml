@@ -6,29 +6,20 @@ on:
     types: [push-live] 
   push:
     branches: main
-  workflow_dispatch:
   
 jobs:
-  build:
+  run:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout current repository to Master branch
-        uses: actions/checkout@v1
-      - name: Setup NodeJs 16.x
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+
+      - name: Create report file
+        run: date +%s > report.txt
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v8
         with:
-          node-version: '16.x'
-      - name: Cache dependencies and build outputs to improve workflow execution time.
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-js-${{ hashFiles('package-lock.json') }}
-      - name: Install dependencies
-        run: npm install
-      - name: Generate README file
-        run: node info.txt
-      - name: Commit and Push new README.md to the repository
-        uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          author_name: Your Name
+          author_email: mail@example.com
+          message: 'Your commit message'
+          add: 'report.txt'
