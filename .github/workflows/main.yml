@@ -24,7 +24,7 @@ jobs:
 
     # Render READEME.md using rmarkdown
     - name: render README
-      run: Rscript -e 'rmarkdown::render("README.Rmd", output_format = "md_document")'
+      run: Rscript -e 'rmarkdown::render("README.md", output_format = "md_document")'
 
     - name: commit rendered README
       run: |
