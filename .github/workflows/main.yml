@@ -11,15 +11,17 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Create report file
-        run: date +%s > report.txt
-
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v8
+      - name: Check out repo
+        uses: actions/checkout@v2
+      - name: Use Node
+        uses: actions/setup-node@v1
         with:
-          author_name: Your Name
-          author_email: mail@example.com
-          message: 'Your commit message'
-          add: 'report.txt'
+          node-version: '16.x'
+      - name: Commit and push if changed
+        run: |-
+          git diff
+          git config --global user.email "actions@users.noreply.github.com"
+          git config --global user.name "README-bot"
+          git add -A
+          git commit -m "Updated content" || exit 0
+          git push
