@@ -1,6 +1,6 @@
 ## Portfolio Blueprint
 
-Last updated:
+
 
 ---
 
@@ -12,4 +12,3 @@ Last updated:
 
 ---
 
-**[illustrate.digital](https://www.illustrate.digital)**
