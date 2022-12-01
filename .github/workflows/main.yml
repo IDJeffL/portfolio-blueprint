@@ -25,13 +25,14 @@ jobs:
           git add -A
           git commit -m "Updated content" || exit 0
           git push
-          
+      - name: Get current date
+        run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
       - name: Update GitHub Profile README
         uses: theboi/github-update-readme@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          header: "Hey, I'm Ryan! 👋"
-          subhead: "Currently a student in Singapore, passionate about creating all-things-tech to improve society."
-          footer: "**Learn more about me at [ryanthe.com](https://www.ryanthe.com)!**"
+          header: "Portfolio Blueprint"
+          subhead: "Last updated: ${{ steps.date.outputs.today }} "
+          footer: "**[illustrate.digital](https://www.illustrate.digital)**"
           ref: "main"
