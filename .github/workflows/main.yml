@@ -17,7 +17,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-
+      - name: "Get time"
+        run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
       - name: Update GitHub Profile README
         uses: theboi/github-update-readme@main
         env:
@@ -25,5 +26,5 @@ jobs:
         with:
           header: "Portfolio Blueprint"
           subhead: ""
-          footer: ""
+          footer: ${{ steps.date.outputs.today }}
           ref: "main"
