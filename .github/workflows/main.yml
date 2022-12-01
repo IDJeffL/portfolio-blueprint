@@ -25,3 +25,13 @@ jobs:
           git add -A
           git commit -m "Updated content" || exit 0
           git push
+          
+      - name: Update GitHub Profile README
+        uses: theboi/github-update-readme@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          header: "Hey, I'm Ryan! 👋"
+          subhead: "Currently a student in Singapore, passionate about creating all-things-tech to improve society."
+          footer: "**Learn more about me at [ryanthe.com](https://www.ryanthe.com)!**"
+          ref: "main"
