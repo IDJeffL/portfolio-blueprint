@@ -1,6 +1,6 @@
-## Hey, I'm Ryan! 👋
+## Portfolio Blueprint
 
-Currently a student in Singapore, passionate about creating all-things-tech to improve society.
+Last updated:
 
 ---
 
@@ -12,4 +12,4 @@ Currently a student in Singapore, passionate about creating all-things-tech to i
 
 ---
 
-**Learn more about me at [ryanthe.com](https://www.ryanthe.com)!**
+**[illustrate.digital](https://www.illustrate.digital)**
