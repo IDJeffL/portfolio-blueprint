@@ -13,7 +13,7 @@ export default function LoginForm({ postContent }) {
    * ( set postContent value ) 
    */
   postContent = postContent.content
-  
+
   /**
    * WP Register Shortcode 
    * ( if the postContent doesnt include the shortcode for this form, let's exit here )
@@ -22,7 +22,7 @@ export default function LoginForm({ postContent }) {
   if ( ! formShortcode.includes( '[wpLoginForm]') ) {
     return ( <></> )
   }
-  
+
   /**
    * Reset formFields 
    */
@@ -173,6 +173,7 @@ export default function LoginForm({ postContent }) {
           } else {
             /* Success, store data locally */
             localStorage.user = Buffer.from( jwtToken.split('.')[1], 'base64' )
+            localStorage.userJWT = Buffer.from( jwtToken )
             /* Reload page ( remove login form ), so we can show user is logged in */
             window.location.href = "/";
           }
