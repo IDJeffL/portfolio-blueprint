@@ -70,7 +70,7 @@ export default function Component(props) {
                 then lets convert the WP Shortcode into the form html
                 ( remember to remove the WP Shortcode from Gravityforms )
               */}
-              <Loginform postContent={props?.data?.post} />
+              <LoginForm postContent={props?.data?.post} />
               <RegisterForm postContent={props?.data?.post} />
               <ResetPassword postContent={props?.data?.post} />
               <UpdatePassword postContent={props?.data?.post} />
