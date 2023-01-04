@@ -33,12 +33,14 @@ export default function Session({}) {
   function logoutUser() {
     if ( typeof localStorage !== 'undefined' && localStorage.getItem('user') !== null ) {
       localStorage.removeItem('user');
+      localStorage.removeItem('userJWT');
     }
   }
   let loginStatus = ( logout === 'true' ) ? logoutUser() : true
 
   /* Display login/logout menus based on user status */
   let [userStatus, getUserData] = useState({});
+
 
   /* Show logged out menu as default */
   let userStatusMenu = '<a href="../login">Login</a> | <a href="../register">Register</a>'
@@ -52,8 +54,16 @@ export default function Session({}) {
    * Get user details from localStorage obj 
    */
   useEffect(()=> {
-    getUserData(localStorage.getItem('user'));
+    getUserData(localStorage.getItem('user'))
   }, [])
+
+  /**
+   * Get user details from localStorage obj 
+   */
+   let [userStatusJWT, getUserDataJWT] = useState({});
+   useEffect(()=> {
+     getUserDataJWT(localStorage.getItem('userJWT'))
+   }, [])
 
   /**
    * Return user status menu
