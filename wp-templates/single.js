@@ -13,7 +13,7 @@ import {
   TaxonomyTerms,
   GravityForms,
   Acf,
-  Loginform,
+  LoginForm,
   RegisterForm,
   ResetPassword,
   UpdatePassword,
