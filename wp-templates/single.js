@@ -35,8 +35,6 @@ export default function Component(props) {
   const primaryMenu = props?.data?.headerMenuItems?.nodes ?? [];
   const footerMenu = props?.data?.footerMenuItems?.nodes ?? [];
   const { title, content, featuredImage, date, author } = props.data.post;
-  
-  console.log( 'props.data.post: ', props.data.post )
 
   return (
     <>
