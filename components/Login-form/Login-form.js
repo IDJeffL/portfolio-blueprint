@@ -14,8 +14,6 @@ export default function LoginForm({ postContent }) {
    */
   postContent = postContent.content
   
-  console.log( 'you are on line 17' )
-
   /**
    * WP Register Shortcode 
    * ( if the postContent doesnt include the shortcode for this form, let's exit here )
@@ -25,8 +23,6 @@ export default function LoginForm({ postContent }) {
     return ( <></> )
   }
   
-  console.log( 'you are on line 24' )
-
   /**
    * Reset formFields 
    */
