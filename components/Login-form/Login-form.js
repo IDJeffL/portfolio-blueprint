@@ -1,6 +1,6 @@
 import styles from './Login-form.module.scss';
 
-export default function Loginform({ postContent }) {
+export default function LoginForm({ postContent }) {
 
   /**
    * WordPress API Url
