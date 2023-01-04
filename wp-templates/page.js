@@ -34,6 +34,8 @@ export default function Component(props) {
   const primaryMenu = props?.data?.headerMenuItems?.nodes ?? [];
   const footerMenu = props?.data?.footerMenuItems?.nodes ?? [];
   const { databaseId, title, content, featuredImage } = props?.data?.page ?? { title: '' };
+  
+  console.log( 'databaseId: ', databaseId)
 
   return (
     <>
@@ -41,7 +43,7 @@ export default function Component(props) {
         yoastSeo={props?.data?.page?.seo}
       />
   
-      <EditHtml postId={databaseId} />
+  {/*<EditHtml postId={databaseId} />*/}
         
       <Header
         title={siteTitle}
