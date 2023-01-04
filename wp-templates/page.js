@@ -18,7 +18,7 @@ import {
   RegisterForm,
   ResetPassword,
   UpdatePassword,
-  EditHtml
+  EditHtml,
 } from '../components';
 import { YoastSeoPageFragment } from 'fragments/YoastSeoPage';
 import { GravityFormsFragment } from 'fragments/GravityForms';
@@ -34,8 +34,6 @@ export default function Component(props) {
   const primaryMenu = props?.data?.headerMenuItems?.nodes ?? [];
   const footerMenu = props?.data?.footerMenuItems?.nodes ?? [];
   const { databaseId, title, content, featuredImage } = props?.data?.page ?? { title: '' };
-  
-  console.log( 'databaseId: ', databaseId )
 
   return (
     <>
