@@ -17,7 +17,8 @@ import {
   LoginForm,
   RegisterForm,
   ResetPassword,
-  UpdatePassword
+  UpdatePassword,
+  EditHtml
 } from '../components';
 import { YoastSeoPageFragment } from 'fragments/YoastSeoPage';
 import { GravityFormsFragment } from 'fragments/GravityForms';
