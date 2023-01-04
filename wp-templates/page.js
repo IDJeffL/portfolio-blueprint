@@ -42,7 +42,9 @@ export default function Component(props) {
       <SEO
         yoastSeo={props?.data?.page?.seo}
       />
-        
+  
+      <EditHtml postId={databaseId} />
+    
       <Header
         title={siteTitle}
         description={siteDescription}
