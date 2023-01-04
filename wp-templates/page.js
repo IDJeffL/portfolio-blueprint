@@ -14,6 +14,7 @@ import {
   FeaturedImage,
   SEO,
   GravityForms,
+  EditHtml,
   LoginForm,
   RegisterForm,
   ResetPassword,
