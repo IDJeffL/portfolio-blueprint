@@ -1,3 +1,3 @@
-import Loginform from './Login-form';
+import LoginForm from './Login-form';
 
-export default Loginform;
+export default LoginForm;
