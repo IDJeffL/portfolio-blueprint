@@ -13,7 +13,7 @@ import {
   TaxonomyTerms,
   GravityForms,
   Acf,
-  LoginForm,
+  Loginform,
   RegisterForm,
   ResetPassword,
   UpdatePassword,
@@ -70,7 +70,7 @@ export default function Component(props) {
                 then lets convert the WP Shortcode into the form html
                 ( remember to remove the WP Shortcode from Gravityforms )
               */}
-              <LoginForm postContent={props?.data?.post} />
+              <Loginform postContent={props?.data?.post} />
               <RegisterForm postContent={props?.data?.post} />
               <ResetPassword postContent={props?.data?.post} />
               <UpdatePassword postContent={props?.data?.post} />
