@@ -28,6 +28,6 @@ export default function EditHtml( { postId } ) {
         </div>
       </div>
     </>
-  );
+  ); 
 
 }
