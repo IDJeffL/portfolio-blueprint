@@ -32,7 +32,7 @@ export default function Component(props) {
     props?.data?.generalSettings;
   const primaryMenu = props?.data?.headerMenuItems?.nodes ?? [];
   const footerMenu = props?.data?.footerMenuItems?.nodes ?? [];
-  const { databaseId, title, content, featuredImage } = props?.data?.page ?? { title: '' };
+  const { title, content, featuredImage } = props?.data?.page ?? { title: '' };
 
   return (
     <>
@@ -96,7 +96,6 @@ Component.query = gql`
     $asPreview: Boolean = false
   ) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
-      databaseId
       title
       content
       ...FeaturedImageFragment
