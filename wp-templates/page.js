@@ -14,7 +14,6 @@ import {
   FeaturedImage,
   SEO,
   GravityForms,
-  EditHtml,
   LoginForm,
   RegisterForm,
   ResetPassword,
@@ -42,8 +41,6 @@ export default function Component(props) {
       <SEO
         yoastSeo={props?.data?.page?.seo}
       />
-  
-  {/*<EditHtml postId={databaseId} />*/}
         
       <Header
         title={siteTitle}
