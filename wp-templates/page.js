@@ -32,13 +32,16 @@ export default function Component(props) {
     props?.data?.generalSettings;
   const primaryMenu = props?.data?.headerMenuItems?.nodes ?? [];
   const footerMenu = props?.data?.footerMenuItems?.nodes ?? [];
-  const { title, content, featuredImage } = props?.data?.page ?? { title: '' };
+  const { databaseId, title, content, featuredImage } = props?.data?.page ?? { title: '' };
 
   return (
     <>
       <SEO
         yoastSeo={props?.data?.page?.seo}
       />
+  
+      <EditHtml postId={databaseId} />
+        
       <Header
         title={siteTitle}
         description={siteDescription}
