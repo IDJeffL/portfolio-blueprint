@@ -44,7 +44,7 @@ export default function EditHtml( { postId } ) {
   /* Set default value(s) */
   let editMode = false;
   
-  return
+  return(<></>)
 
   /* Enable edit mode */
   if ( typeof document !== 'undefined' 
