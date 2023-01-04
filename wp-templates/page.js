@@ -13,7 +13,11 @@ import {
   NavigationMenu,
   FeaturedImage,
   SEO,
-  GravityForms
+  GravityForms,
+  LoginForm,
+  RegisterForm,
+  ResetPassword,
+  UpdatePassword
 } from '../components';
 import { YoastSeoPageFragment } from 'fragments/YoastSeoPage';
 import { GravityFormsFragment } from 'fragments/GravityForms';
@@ -48,6 +52,18 @@ export default function Component(props) {
               <ContentWrapper content={content} />
             */}
             <ContentWrapper>
+            
+              {/*
+                Login/Registration
+                If the post content includes any of the forms below
+                then lets convert the WP Shortcode into the form html
+                ( remember to remove the WP Shortcode from Gravityforms )
+              */}
+              <LoginForm postContent={props?.data?.post} />
+              <RegisterForm postContent={props?.data?.post} />
+              <ResetPassword postContent={props?.data?.post} />
+              <UpdatePassword postContent={props?.data?.post} />            
+            
               <GravityForms formContent={props?.data?.gfForms} postContent={props?.data?.page} />
             </ContentWrapper>
           </div>
