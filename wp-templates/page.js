@@ -14,11 +14,11 @@ import {
   FeaturedImage,
   SEO,
   GravityForms,
+  EditHtml,
   LoginForm,
   RegisterForm,
   ResetPassword,
-  UpdatePassword,
-  EditHtml,
+  UpdatePassword
 } from '../components';
 import { YoastSeoPageFragment } from 'fragments/YoastSeoPage';
 import { GravityFormsFragment } from 'fragments/GravityForms';
