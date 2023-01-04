@@ -13,6 +13,8 @@ export default function Loginform({ postContent }) {
    * ( set postContent value ) 
    */
   postContent = postContent.content
+  
+  console.log( 'you are on line 17' )
 
   /**
    * WP Register Shortcode 
@@ -22,6 +24,8 @@ export default function Loginform({ postContent }) {
   if ( ! formShortcode.includes( '[wpLoginForm]') ) {
     return ( <></> )
   }
+  
+  console.log( 'you are on line 24' )
 
   /**
    * Reset formFields 
