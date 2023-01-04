@@ -43,7 +43,7 @@ export default function Component(props) {
         yoastSeo={props?.data?.page?.seo}
       />
   
-  {/*<EditHtml postId={databaseId} />*/}
+      <EditHtml postId={databaseId} />
         
       <Header
         title={siteTitle}
@@ -102,6 +102,7 @@ Component.query = gql`
     $asPreview: Boolean = false
   ) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
+      databaseId
       title
       content
       ...FeaturedImageFragment
