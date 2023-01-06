@@ -48,6 +48,8 @@ export default function Session({}) {
   /* Show logged in menu if user is logged in */
   if ( userStatus && userStatus.length > 1 ) {
     userStatusMenu = '<a href="../members/dashboard">Dashboard</a> | <a href="?logout=true" id="logout" class="' + styles.wpUserLogoutLink +'">Logout</a>'
+                   + '<br />'
+                   + 'Here is some new text ...'
   }
 
   /**
