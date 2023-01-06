@@ -47,9 +47,10 @@ export default function Session({}) {
 
   /* Show logged in menu if user is logged in */
   if ( userStatus && userStatus.length > 1 ) {
+    const userDetails = JSON.parse(userStatus);
     userStatusMenu = '<a href="../members/dashboard">Dashboard</a> | <a href="?logout=true" id="logout" class="' + styles.wpUserLogoutLink +'">Logout</a>'
                    + '<br />'
-                   + 'Welcome ' + userStatus.username
+                   + 'Welcome ' + userDetails.username
   }
 
   /**
