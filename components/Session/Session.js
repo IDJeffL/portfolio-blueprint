@@ -50,6 +50,8 @@ export default function Session({}) {
     userStatusMenu = '<a href="../members/dashboard">Dashboard</a> | <a href="?logout=true" id="logout" class="' + styles.wpUserLogoutLink +'">Logout</a>'
                    + '<br />'
                    + 'Here is some new text ...'
+    
+    console.log( 'userStatus: ', userStatus )
   }
 
   /**
