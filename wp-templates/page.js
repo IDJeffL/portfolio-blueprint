@@ -17,7 +17,8 @@ import {
   LoginForm,
   RegisterForm,
   ResetPassword,
-  UpdatePassword
+  UpdatePassword,
+  EditHtml
 } from '../components';
 import { YoastSeoPageFragment } from 'fragments/YoastSeoPage';
 import { GravityFormsFragment } from 'fragments/GravityForms';
@@ -32,12 +33,17 @@ export default function Component(props) {
     props?.data?.generalSettings;
   const primaryMenu = props?.data?.headerMenuItems?.nodes ?? [];
   const footerMenu = props?.data?.footerMenuItems?.nodes ?? [];
-  const { title, content, featuredImage } = props?.data?.page ?? { title: '' };
+  const { databaseId, title, content, featuredImage } = props?.data?.page ?? { title: '' };
 
+  console.log( 'databaseId: ', databaseId )
+  
   return (
     <>
       <SEO
         yoastSeo={props?.data?.page?.seo}
+      />
+      <EditHtml 
+        postId={databaseId} 
       />
       <Header
         title={siteTitle}
@@ -96,6 +102,7 @@ Component.query = gql`
     $asPreview: Boolean = false
   ) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
+      databaseId
       title
       content
       ...FeaturedImageFragment
