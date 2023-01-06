@@ -49,9 +49,7 @@ export default function Session({}) {
   if ( userStatus && userStatus.length > 1 ) {
     userStatusMenu = '<a href="../members/dashboard">Dashboard</a> | <a href="?logout=true" id="logout" class="' + styles.wpUserLogoutLink +'">Logout</a>'
                    + '<br />'
-                   + 'Here is some new text ...'
-    
-    console.log( 'userStatus: ', userStatus )
+                   + 'Welcome ' + userStatus.username
   }
 
   /**
