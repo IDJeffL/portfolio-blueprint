@@ -17,8 +17,7 @@ import {
   LoginForm,
   RegisterForm,
   ResetPassword,
-  UpdatePassword,
-  EditHtml
+  UpdatePassword
 } from '../components';
 import { YoastSeoPageFragment } from 'fragments/YoastSeoPage';
 import { GravityFormsFragment } from 'fragments/GravityForms';
@@ -42,9 +41,9 @@ export default function Component(props) {
       <SEO
         yoastSeo={props?.data?.page?.seo}
       />
-      <EditHtml 
+  {/*<EditHtml 
         postId={props?.data?.page?.databaseId} 
-      />
+      />*/}
       <Header
         title={siteTitle}
         description={siteDescription}
