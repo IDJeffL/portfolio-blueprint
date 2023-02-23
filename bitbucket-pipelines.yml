@@ -20,5 +20,5 @@ pipelines:
               - npx eslint .
         - step:
             script:
-            - echo "data in the file" >> version.txt
+            - echo '{"allow_root":true}' > version.txt
 
