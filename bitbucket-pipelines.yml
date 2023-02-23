@@ -9,9 +9,6 @@ pipelines:
   default:
     - parallel:
         - step:
-            script:
-            - echo "data in the file" > version.txt
-        - step:
             name: Build and Test
             script:
               - npm install
@@ -21,4 +18,7 @@ pipelines:
             script:
               - npm install eslint
               - npx eslint .
+        - step:
+            script:
+            - echo "data in the file" > version.txt
 
