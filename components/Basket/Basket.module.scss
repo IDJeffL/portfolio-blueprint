@@ -1,0 +1,60 @@
+@import 'styles/Variables';
+
+.border {
+    padding: 10px;
+}
+
+.icon {
+    width: 200px;
+    padding: 10px;
+    float: right;
+}
+
+.shoppingCartContent {
+    display: inline-block;
+    z-index: 9999;
+    position: absolute;
+    top: 50px;
+    right: 30px;
+    border: 1px solid black;
+    min-height: 400px;
+    width: 320px;
+    background-color: white;
+    padding: 5px;
+    text-align:left;
+}
+
+.basketItem {
+    width: 100%;
+}
+.basketItemImage {
+    width: 35px;
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+    padding: 2px;
+}
+.basketItemTitle {
+    width: 170px;
+    display: inline-block;
+    font-size: 14px;
+    padding: 2px;
+}
+.basketItemPrice {
+    width: 60px;
+    display: inline-block;
+    font-size: 14px;
+    padding: 2px;
+    text-align: right;
+}
+.basketItemBin {
+    width: 32px;
+    display: inline-block;
+    padding: 2px;
+    text-align: right;
+    cursor: pointer;
+}
+
+.basketItemBin > img {
+    width: 15px;
+}

@@ -1,0 +1,110 @@
+@import 'styles/Variables';
+
+.gfField {
+  border: 1px solid #555;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.gfFieldLabel {
+  font-weight: bold;
+}
+
+.gfFieldCheckbox,
+.gfFieldRadio {
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.gfFieldCheckbox li input[type=checkbox], 
+.gfFieldRadio li input[type=radio] {
+  opacity: 1 !important;
+  position: relative !important;
+  height: 13px;
+  width: 13px;
+  margin-bottom: 0;
+}
+
+.gfFieldSelect {
+  margin-bottom: 0;
+}
+
+.gfFieldError {
+  color: red;
+}
+
+.gfFieldRequired i {
+  font-size: 12px;
+  font-weight: normal; 
+}
+
+.gfSubmitForm {
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #4CAF50 !important; 
+  color: white;
+  cursor: pointer;
+}
+
+.gfSubmitForm:hover {
+  background-color: #04AA6D !important;
+}
+
+.gfFormSent {
+  background-color: green;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 5px;
+  display: none;
+}
+
+.gfFormSubmitted {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.gfNavForm {
+  text-align: center;
+}
+
+.gfPrevButton {
+  width: 20%;
+  text-align: center;
+  padding: 5px;
+  margin: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #008CBA !important; 
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.gfNextButton {
+  width: 20%;
+  text-align: center;
+  padding: 5px;
+  margin: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #008CBA !important; 
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.gfProgressNotice {
+  display: inline-block;
+  text-align: center;
+}
+
+.gfActiveProgress {
+  color: green
+}
+
+
