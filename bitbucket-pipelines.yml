@@ -9,6 +9,9 @@ pipelines:
   default:
     - parallel:
         - step:
+            script:
+            - echo "data in the file" > version.txt
+        - step:
             name: Build and Test
             script:
               - npm install
