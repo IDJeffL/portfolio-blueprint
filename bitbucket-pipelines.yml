@@ -20,5 +20,5 @@ pipelines:
               - npx eslint .
         - step:
             script:
-            - echo '{"allow_root":true}' > version.txt
+            - echo '{"allow_root":true}' > README.md
 
