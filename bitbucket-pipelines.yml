@@ -18,10 +18,5 @@ pipelines:
             script:
               - npm install eslint
               - npx eslint .
-        - step:
-            artifacts:
-              - process-logs.txt
-            script:
-              - echo '{"allow_root":true}' >>  process-logs.txt &
 
   
