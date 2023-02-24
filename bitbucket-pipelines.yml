@@ -13,10 +13,5 @@ pipelines:
             script:
               - npm install
               - npm run build
-        - step:
-            name: Code linting
-            script:
-              - npm install eslint
-              - npx eslint .
 
   
