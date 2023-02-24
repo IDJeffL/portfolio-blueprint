@@ -1,7 +1,4 @@
-#  Template NodeJS build
-
-#  This template allows you to validate your NodeJS code.
-#  The workflow allows running tests and code linting on the default branch.
+#  Set updated file so remote servers can detect updates and rebuild headless
 
 image: node:16
 
@@ -10,7 +7,7 @@ pipelines:
     main:
       - step:
           script:
-            - echo "$(date +%Y-%m-%d_%H:%M:%S)" >> test.txt
+            - echo "$(date +%Y-%m-%d_%H:%M:%S)" >> LAST-UPDATED.txt
             - git add --update :/
             - git commit -m "version increment [skip ci]"
             - git push
