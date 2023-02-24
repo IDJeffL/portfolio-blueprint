@@ -1,4 +1,4 @@
-#  Set updated file so remote servers can detect updates and rebuild headless
+# Update WP-UPDATE-REQUEST.txt file so remote servers (eg. WP ENGINE / Vercel ) can detect and rebuild/update headless
 
 image: node:16
 
