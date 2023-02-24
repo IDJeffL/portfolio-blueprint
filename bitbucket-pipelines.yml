@@ -7,7 +7,7 @@ pipelines:
     main:
       - step:
           script:
-            - echo "$(date +%Y-%m-%d_%H:%M:%S)" >> LAST-UPDATE.txt
-            - git add LAST-UPDATE.txt
-            - git commit -m "version increment [skip ci]"
+            - echo "$(date +%Y-%m-%d_%H:%M:%S)" >> WP-UPDATE-REQUEST.txt
+            - git add WP-UPDATE-REQUEST.txt
+            - git commit -m "WP Update Request"
             - git push
