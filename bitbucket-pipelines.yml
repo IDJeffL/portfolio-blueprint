@@ -9,9 +9,8 @@ pipelines:
   branches:
     main:
       - step:
-          name: Build and Test
           script:
-            - npm install
-            - npm run build
-
-  
+          - echo "Updated build ${BITBUCKET_BUILD_NUMBER}" >> UPDATES.md
+          - git add UPDATES.md
+          - git commit -m "Updating UPDATES.md with latest build number."
+          - git push
