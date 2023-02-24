@@ -10,7 +10,11 @@ pipelines:
     main:
       - step:
           script:
-          - echo "Updated build ${BITBUCKET_BUILD_NUMBER}" >> UPDATES.md
-          - git add UPDATES.md
-          - git commit -m "Updating UPDATES.md with latest build number."
-          - git push
+            - pipe: atlassian/rsync-deploy:0.3.2
+              variables:
+                EXTRA_ARGS: '--exclude=UPDATE.md'
+                
+            - echo "Updated build ${BITBUCKET_BUILD_NUMBER}" >> UPDATES.md
+            - git add UPDATES.md
+            - git commit -m "Updating UPDATES.md with latest build number."
+            - git push
