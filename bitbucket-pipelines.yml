@@ -9,7 +9,7 @@ pipelines:
   default:
     - step:
         script:
-        - echo "Made a change in build ${BITBUCKET_BUILD_NUMBER}" >> changes.txt
+        - echo "$(date +%Y-%m-%d_%H:%M:%S) - Updated build ${BITBUCKET_BUILD_NUMBER}" >> changes.txt
         - git add changes.txt
         - git commit -m "Updating changes.txt with latest build number."
         - git push
