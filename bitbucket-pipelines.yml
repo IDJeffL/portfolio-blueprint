@@ -9,5 +9,5 @@ pipelines:
           script:
             - echo "$(date +%Y-%m-%d_%H:%M:%S)" >> WP-UPDATE-REQUEST.txt
             - git add WP-UPDATE-REQUEST.txt
-            - git commit -m "WP Update Request"
+            - git commit -m "WP Update Request [skip ci]"
             - git push
