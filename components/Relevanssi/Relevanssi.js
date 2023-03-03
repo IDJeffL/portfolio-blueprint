@@ -121,7 +121,7 @@ export default function Relevanssi({ searchQuery }) {
       /* Featured Image */
       let featuredImage = ( data[0].data[i].yoast_head_json.og_image === undefined )
           ? '<img style="width:100%;" src="no-image.jpg" />' 
-          : '<img style="width:100%;" src="' + data[0].data[0].yoast_head_json.og_image[0].url + '" />'
+          : '<img style="width:100%;" src="' + data[0].data[i].yoast_head_json.og_image[0].url + '" />'
 
       /* HTML Output */
       results += '<div class="row" data-count="' + data[0].data.length + '">'
