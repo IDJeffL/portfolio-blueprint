@@ -85,6 +85,13 @@ export default function Basket( { localStorageName } ) {
     return items
   }
 
+  /**
+   * Proceed to checkout
+   */
+  function proceedToCheckout() {
+    window.location.assign( './shop/checkout' )
+  }
+
   return (
     <>
       <div className={styles.border}>
@@ -150,8 +157,7 @@ export default function Basket( { localStorageName } ) {
                     id="buttonProceedCheckout" 
                     onClick={
                       function() {
-                        // Todo: 
-                        // proceedToCheckout();
+                        proceedToCheckout();
                       }
                     }  
                     style={{

@@ -67,6 +67,10 @@ export default function SEO({ yoastSeo, title, description }) {
           crossOrigin="anonymous" 
           async></script>
 
+        {/* Stripe Payments */}  
+        <script 
+          src="https://js.stripe.com/v3/"></script>
+
       </Head>
     </>
   );

@@ -19,19 +19,27 @@ import { pageTitle } from 'utilities';
 import { BlogInfoFragment } from 'fragments/GeneralSettings';
 import appConfig from 'app.config';
 
-/* Append to Fetch Request */
-let fetcher = (url) => {
-  return axios
-      .get(url, { 
-          headers: { 
-              'Authorization': 'Basic Y2tfYzNjMGE2MTQwZmZjMjRjMTRkYTIxNWJlN2NjOWQ2Nzg2ZmMyNGMxNDpjc185OTk4ZWVlMGQyYTM0Y2I3YjNjMTAzMjljMjEyODg2MzA3NDc3Y2E2',
-              'Accept': 'application/json'
-          }
-      })
-      .then((res) => [res.data, res.headers] );
-}
+  /**
+   * Stripe API Vars
+   * ( this should be configured in the .env.local file )
+   */
+   const STRIPE_WOO_CK_CS_BASE64_AUTH_KEY='Y2tfOTM0Nzg0ZmUzYjZhMDJmZGY5N2FhZmQyNTY0MmU5YmVjZGNkN2FjYTpjc18zODFmNjQ3Y2NlY2M3MTk1YzdkYzcyOTMwMDA0ZDBmNGI4OWNhMGMz'
+   const STRIPE_WOO_SITE_URL='https://trustpaytest.wpengine.com'
+ 
+   /* Append to Fetch Request */
+   let fetcher = (url) => {
+     return axios
+         .get(url, { 
+             headers: { 
+                 'Authorization': 'Basic ' + STRIPE_WOO_CK_CS_BASE64_AUTH_KEY,
+                 'Accept': 'application/json'
+             }
+         })
+         .then((res) => [res.data, res.headers] );
+   } 
 
-export default function Page() {
+export default function Page() { 
+
   const [pageIndex, setPageIndex] = useState(1);
   const [totalPages, setTotalPagesIndex] = useState(0);
 
@@ -62,7 +70,7 @@ export default function Page() {
       pageIndex = 1
     }
     /* Get data */
-    let url = 'https://trustpaytest.wpengine.com/wp-json/wc/v3/products/?status=publish'
+    let url = STRIPE_WOO_SITE_URL + '/wp-json/wc/v3/products/?status=publish'
     let params = '&per_page=' + perPage 
                + '&page=' + pageIndex
                + '&orderby=id'
@@ -89,6 +97,9 @@ export default function Page() {
       document.getElementById( 'navigationWooCommerceProducts' ).style.display = 'inline-block'
       /* Update Shopping Cart button text ( inc. items count ) */
       let shoppingCartItems = JSON.parse('[' + localStorage.getItem( 'MyShoppingCart' ) + ']')
+      if ( ! shoppingCartItems || shoppingCartItems[0] === null ) {
+        shoppingCartItems.length = 0
+      }
       document.getElementById( 'basketItemCount' ).innerHTML = shoppingCartItems.length
       /* Return products data */
       return ( data[0] ) ? WooCommerceProducts( data[0], pageIndex ) : ''
@@ -108,7 +119,7 @@ export default function Page() {
             "textAlign":"center",
            }}>
         <div> 
-          {item.images[0] && 
+          {item.images[0] &&
             <Image 
               src={item.images[0].src}
               alt=''
