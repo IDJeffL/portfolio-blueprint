@@ -25,6 +25,10 @@ import { GravityFormsFragment } from 'fragments/GravityForms';
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Component(props) {
+  useEffect(()=>{
+    import("bootstrap/dist/js/bootstrap");
+  },[])
+  
   // Loading state for previews
   if (props.loading) {
     return <>Loading...</>;
@@ -35,10 +39,6 @@ export default function Component(props) {
   const primaryMenu = props?.data?.headerMenuItems?.nodes ?? [];
   const footerMenu = props?.data?.footerMenuItems?.nodes ?? [];
   const { databaseId, title, content, featuredImage } = props?.data?.page ?? { title: '' };
-
-  useEffect(()=>{
-    import("bootstrap/dist/js/bootstrap");
-  },[])
   
   return (
     <>
