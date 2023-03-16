@@ -22,9 +22,14 @@ import {
 } from '../components';
 import { YoastSeoPageFragment } from 'fragments/YoastSeoPage';
 import { GravityFormsFragment } from 'fragments/GravityForms';
+import { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Component(props) {
+  useEffect(()=>{
+    import("bootstrap/dist/js/bootstrap");
+  },[])
+  
   // Loading state for previews
   if (props.loading) {
     return <>Loading...</>;
