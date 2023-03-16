@@ -39,11 +39,7 @@ export default function Component() {
   };
   return (
     <>
-      <SEO 
-        yoastSeo='' 
-        title={siteTitle} 
-        description={siteDescription} 
-        />
+      <SEO title={siteTitle} description={siteDescription} />
 
       <Header
         title={siteTitle}
@@ -63,7 +59,7 @@ export default function Component() {
               world&apos;s #1 open source CMS in one powerful headless platform.{' '}
             </p>
             <div className={styles.actions}>
-              <Button styleType="secondary" href="/posts">
+              <Button styleType="secondary" href="/contact-us">
                 GET STARTED
               </Button>
               <Button styleType="primary" href="/about">
@@ -120,17 +116,6 @@ Component.variables = () => {
   };
 };
 
-/**
- * We dont want specific WP Posts in this query.
- * Limit results using the notIn 'Post id' value.
- * 
- * Login:           cG9zdDoyMzE=
- * Register:        cG9zdDoyMzM=
- * Reset Password:  cG9zdDoyMzU=
- * Update Password: cG9zdDoyMzc=
- * Search:          cG9zdDoyOTE=
- */
-
 Component.query = gql`
   ${BlogInfoFragment}
   ${NavigationMenu.fragments.entry}
@@ -140,18 +125,7 @@ Component.query = gql`
     $footerLocation: MenuLocationEnum
     $first: Int
   ) {
-    posts(
-      first: $first,
-      where: {
-        notIn: [
-          "cG9zdDoyMzE=",
-          "cG9zdDoyMzM=",
-          "cG9zdDoyMzU=",
-          "cG9zdDoyMzc=",
-          "cG9zdDoyOTE="
-        ]
-      }
-    ) {
+    posts(first: $first) {
       nodes {
         ...PostsItemFragment
       }
