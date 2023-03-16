@@ -3,8 +3,7 @@
 
 ---
 
-| [Illustrate Development/headless-site](https://bitbucket.org/illustratedevelopment/headless-site) |
-| :-: |
+[Illustrate Development/headless-site](https://bitbucket.org/illustratedevelopment/headless-site)
 
 ---
 
