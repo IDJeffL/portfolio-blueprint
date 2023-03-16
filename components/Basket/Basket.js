@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import styles from './Basket.module.scss';
 
 /**
@@ -305,9 +307,12 @@ export default function Basket( { localStorageName } ) {
                         }}>Shipping:</td>
                       <td>
                         <span id="shippingOptions">
-                          <img style={{'height':'20px'}} 
-                               src="./spin.webp" 
-                               alt="" />
+                          <Image
+                              src="/spin.webp" 
+                              alt="Loading"
+                              width={20}
+                              height={20}
+                              />
                         </span>
                       </td>
                     </tr>
