@@ -17,6 +17,7 @@ import {
 } from 'components';
 import { BlogInfoFragment } from 'fragments/GeneralSettings';
 import { useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 
 if ( typeof window !== "undefined" ) {
   window.$ = window.jQuery = require('jquery')
@@ -25,18 +26,17 @@ if ( typeof window !== "undefined" ) {
 const postsPerPage = 3;
 
 export default function Component() {
-
-  useEffect(() => {
-    $("h1").fadeOut(3000).fadeIn(3000)
-  },[])
-  
   const { data, loading } = useQuery(Component.query, {
     variables: Component.variables(),
   });
   if (loading) {
     return null;
   }
-
+  
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap");
+  },[])
+  
   useEffect(() => {
     $("h1").fadeOut(3000).fadeIn(3000)
   },[])
