@@ -35,6 +35,10 @@ export default function Component(props) {
   const footerMenu = props?.data?.footerMenuItems?.nodes ?? [];
   const { databaseId, title, content, featuredImage } = props?.data?.page ?? { title: '' };
 
+  useEffect(()=>{
+    import("bootstrap/dist/js/bootstrap");
+  },[])
+  
   return (
     <>
       <SEO
