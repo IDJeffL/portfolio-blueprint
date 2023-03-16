@@ -22,6 +22,7 @@ import {
 } from '../components';
 import { YoastSeoPageFragment } from 'fragments/YoastSeoPage';
 import { GravityFormsFragment } from 'fragments/GravityForms';
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Component(props) {
   // Loading state for previews
