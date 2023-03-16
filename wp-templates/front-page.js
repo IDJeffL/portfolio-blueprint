@@ -1,6 +1,6 @@
 import * as MENUS from 'constants/menus';
 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql} from '@apollo/client';
 import { FaArrowRight } from 'react-icons/fa';
 import styles from 'styles/pages/_Home.module.scss';
 import {
@@ -16,16 +16,30 @@ import {
   Posts,
 } from 'components';
 import { BlogInfoFragment } from 'fragments/GeneralSettings';
+import { useEffect } from 'react';
+
+if ( typeof window !== "undefined" ) {
+  window.$ = window.jQuery = require('jquery')
+}
 
 const postsPerPage = 3;
 
 export default function Component() {
+
+  useEffect(() => {
+    $("h1").fadeOut(3000).fadeIn(3000)
+  },[])
+  
   const { data, loading } = useQuery(Component.query, {
     variables: Component.variables(),
   });
   if (loading) {
     return null;
   }
+
+  useEffect(() => {
+    $("h1").fadeOut(3000).fadeIn(3000)
+  },[])
 
   const { title: siteTitle, description: siteDescription } =
     data?.generalSettings;
@@ -37,9 +51,14 @@ export default function Component() {
     mediaDetails: { width: 1200, height: 600 },
     altText: 'Portfolio Banner',
   };
+
   return (
     <>
-      <SEO title={siteTitle} description={siteDescription} />
+      <SEO 
+        yoastSeo='' 
+        title={siteTitle} 
+        description={siteDescription} 
+        />
 
       <Header
         title={siteTitle}
@@ -59,7 +78,7 @@ export default function Component() {
               world&apos;s #1 open source CMS in one powerful headless platform.{' '}
             </p>
             <div className={styles.actions}>
-              <Button styleType="secondary" href="/contact-us">
+              <Button styleType="secondary" href="/posts">
                 GET STARTED
               </Button>
               <Button styleType="primary" href="/about">
@@ -116,6 +135,17 @@ Component.variables = () => {
   };
 };
 
+/**
+ * We dont want specific WP Posts in this query.
+ * Limit results using the notIn 'Post id' value.
+ * 
+ * Login:           cG9zdDoyMzE=
+ * Register:        cG9zdDoyMzM=
+ * Reset Password:  cG9zdDoyMzU=
+ * Update Password: cG9zdDoyMzc=
+ * Search:          cG9zdDoyOTE=
+ */
+
 Component.query = gql`
   ${BlogInfoFragment}
   ${NavigationMenu.fragments.entry}
@@ -125,7 +155,18 @@ Component.query = gql`
     $footerLocation: MenuLocationEnum
     $first: Int
   ) {
-    posts(first: $first) {
+    posts(
+      first: $first,
+      where: {
+        notIn: [
+          "cG9zdDoyMzE=",
+          "cG9zdDoyMzM=",
+          "cG9zdDoyMzU=",
+          "cG9zdDoyMzc=",
+          "cG9zdDoyOTE="
+        ]
+      }
+    ) {
       nodes {
         ...PostsItemFragment
       }
