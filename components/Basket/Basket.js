@@ -289,7 +289,9 @@ export default function Basket( { localStorageName } ) {
                     "fontSize": "14px",
                     "marginBottom": "50px"
                   }}>
-                  <tbody>
+                  <tbody
+                    className={styles.basketTotalBody}
+                    >
                     <tr>
                       <td 
                         style={{
