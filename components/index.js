@@ -30,11 +30,13 @@ import RegisterForm from './Register-form';
 import ResetPassword from './Reset-password';
 import UpdatePassword from './Update-password';
 import Basket from './Basket';
+import CheckoutForm from './CheckoutForm';
 import Relevanssi from './Relevanssi';
 
 export {
   Relevanssi,
   Basket,
+  CheckoutForm,
   Button,
   ContentWrapper,
   CTA,
