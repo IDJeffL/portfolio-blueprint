@@ -191,7 +191,7 @@ export default function CheckoutForm( id ) {
       }
     })
 
-  }, []);
+  }, [pi_ID]);
 
   return (
     <form onSubmit={handleSubmit} className={styles.paymentForm}>
