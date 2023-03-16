@@ -9,7 +9,11 @@ module.exports = withFaust({
     includePaths: ['node_modules'],
   },
   images: {
-    domains: [getWpHostname(),'trustpaytest.wpengine.com'],
+    domains: [
+      getWpHostname(),
+      'idheadless.wpengine.com',
+      'trustpaytest.wpengine.com'
+    ],
   },
   i18n: {
     locales: ['en'],
