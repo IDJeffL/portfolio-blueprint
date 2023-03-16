@@ -293,7 +293,8 @@ export default function Basket( { localStorageName } ) {
                     <tr>
                       <td 
                         style={{
-                          'padding': '0'
+                          'padding': '0',
+                          'width': '102px'
                           }}>Subtotal:</td>
                       <td>
                         <span id="basketTotal">0.00</span>
