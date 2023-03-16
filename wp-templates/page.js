@@ -25,10 +25,6 @@ import { GravityFormsFragment } from 'fragments/GravityForms';
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Component(props) {
-  useEffect(()=>{
-    import("bootstrap/dist/js/bootstrap");
-  },[])
-  
   // Loading state for previews
   if (props.loading) {
     return <>Loading...</>;
