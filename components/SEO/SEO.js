@@ -32,13 +32,6 @@ export default function SEO({ yoastSeo, title, description }) {
         <link rel="canonical" href={yoastSeo?.opengraphUrl} />
         <script type="application/ld+json" className="yoast-schema-graph">{yoastSeo?.schema?.raw}</script>
 
-        {/* jQuery */}
-        <script
-          src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
-          integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo="
-          crossOrigin="anonymous" 
-          async></script>
-
         {/* Boilerplate CSS */}
         <link 
           rel='stylesheet' 
@@ -50,28 +43,12 @@ export default function SEO({ yoastSeo, title, description }) {
         <script
           id='theme-js' 
           src='https://idheadlessdev.wpengine.com/wp-content/themes/boilerplateparent/assets/js/theme.min.js'
-          async></script>
-
-        {/* 
-        // BootStrap CSS
-        <link 
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
-          rel="stylesheet" 
-          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" 
-          crossOrigin="anonymous" 
-          async></link>
-
-        // BootStrap JS  
-        <script 
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
-          integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" 
-          crossOrigin="anonymous" 
-          async></script>
-          */}
+          async />
 
         {/* Stripe Payments */}  
         <script 
-          src="https://js.stripe.com/v3/"></script>
+          src="https://js.stripe.com/v3/"
+          async />
 
       </Head>
     </>
