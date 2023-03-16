@@ -7,10 +7,10 @@ import styles from './CheckoutForm.module.scss';
  * Stripe API Vars
  * ( this should be configured in the .env.local file )
  */
- const STRIPE_WOO_CK_CS_BASE64_AUTH_KEY='Y2tfOTM0Nzg0ZmUzYjZhMDJmZGY5N2FhZmQyNTY0MmU5YmVjZGNkN2FjYTpjc18zODFmNjQ3Y2NlY2M3MTk1YzdkYzcyOTMwMDA0ZDBmNGI4OWNhMGMz'
- const STRIPE_WOO_SITE_URL='https://trustpaytest.wpengine.com'
- const STRIPE_RETURN_URL='https://hdxj0sc18jcxck49ro00bhabk.js.wpenginepowered.com/shop/complete'
- const STRIPE_SK_KEY='sk_test_51MhWNsG3zgRiYfgw5JPvCFl2YEwbVFkNokgu0a9cbczDg8J9JOYOtLThw2ZE3uqaXvSmejWLA82auflqHrrVsQCh00qO4U0pH5'
+const STRIPE_WOO_CK_CS_BASE64_AUTH_KEY=process.env.NEXT_PUBLIC_STRIPE_WOO_CK_CS_BASE64_AUTH_KEY
+const STRIPE_WOO_SITE_URL=process.env.NEXT_PUBLIC_STRIPE_WOO_SITE_URL
+const STRIPE_RETURN_URL=process.env.NEXT_PUBLIC_STRIPE_RETURN_URL
+const STRIPE_SK_KEY=process.env.NEXT_PUBLIC_STRIPE_SK_KEY
 
 /**
  * Update Order with Custom Values
@@ -110,28 +110,33 @@ export default function CheckoutForm( id ) {
           line_items.push({"product_id": item, "quantity": val})
         })
 
+        /* Submit order details to WooCommerce ( order status isPending Payment ) */
+
         /* Headers */
         let myHeaders = new Headers()
             myHeaders.append("Content-Type", "application/json");
             myHeaders.append("Authorization", "Basic " + STRIPE_WOO_CK_CS_BASE64_AUTH_KEY);
 
-        /* Get shipping cost */
-        let zone_id = 1 /* Shipping zone id */
+        /* Get shipping cost from WooCommerce */
+        /* Request Options */
+        let requestOptions = {
+          method: 'GET',
+          headers: myHeaders,
+        }; 
+        /* Shipping zone id */         
+        let zone_id = 1 
+        /* Selected shipping rate */
         let selectedShippingID = localStorage.getItem( 'selectedShippingRate' )
         if ( Number( selectedShippingID ) ) {
-          /* Request Options */
-          let requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-          };
           fetch( STRIPE_WOO_SITE_URL + "/wp-json/wc/v3/shipping/zones/" + zone_id + "/methods/" + selectedShippingID, requestOptions)
             .then(response => response.text())
             .then(result => {
               result = JSON.parse(result)
-              /* Submit order details to WooCommerce ( order status isPending Payment ) */
+
               /* Form Fields Content */
               let formFieldsBilling = window.document.getElementsByClassName('billingField')
               let formFieldsShipping = window.document.getElementsByClassName('shippingField')
+
               /* Order Content */
               let raw = JSON.stringify({
                 "payment_method": "stripe",
@@ -172,10 +177,10 @@ export default function CheckoutForm( id ) {
 
               /* Request Options */
               requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
+                  method: 'POST',
+                  headers: myHeaders,
+                  body: raw,
+                  redirect: 'follow'
               };
               /* Save Order to WooCommerce */
               fetch( STRIPE_WOO_SITE_URL + "/wp-json/wc/v3/orders", requestOptions)

@@ -22,10 +22,10 @@ import styles from './shop.module.scss';
  * Stripe API Vars
  * ( this should be configured in the .env.local file )
  */
- const STRIPE_WOO_CK_CS_BASE64_AUTH_KEY='Y2tfOTM0Nzg0ZmUzYjZhMDJmZGY5N2FhZmQyNTY0MmU5YmVjZGNkN2FjYTpjc18zODFmNjQ3Y2NlY2M3MTk1YzdkYzcyOTMwMDA0ZDBmNGI4OWNhMGMz'
- const STRIPE_WOO_SITE_URL='https://trustpaytest.wpengine.com'
- const STRIPE_SK_KEY='sk_test_51MhWNsG3zgRiYfgw5JPvCFl2YEwbVFkNokgu0a9cbczDg8J9JOYOtLThw2ZE3uqaXvSmejWLA82auflqHrrVsQCh00qO4U0pH5'
- const STRIPE_PK_KEY='pk_test_51MhWNsG3zgRiYfgwev5nJNPfIlSO5x3LzJdISQ04L9yFk5pkHigvVBOHh8hQZCLkJmK0w61waIrf936a1i7ahjj800lpRkk833'
+const STRIPE_PK_KEY=process.env.NEXT_PUBLIC_STRIPE_PK_KEY
+const STRIPE_SK_KEY=process.env.NEXT_PUBLIC_STRIPE_SK_KEY
+const STRIPE_WOO_SITE_URL=process.env.NEXT_PUBLIC_STRIPE_WOO_SITE_URL
+const STRIPE_WOO_CK_CS_BASE64_AUTH_KEY=process.env.NEXT_PUBLIC_STRIPE_WOO_CK_CS_BASE64_AUTH_KEY
 
 /** 
  * Make sure to call `loadStripe` outside of a component’s 
@@ -46,9 +46,6 @@ setTimeout(function() {
   const stripe = require('stripe')(STRIPE_SK_KEY);
   const paymentIntent = stripe.paymentIntents.retrieve( paymentIntentInUrl )
         paymentIntent.then(function(result) {
-          console.log( result )
-
-
           /* If result status is "succeeded" then update the WooCommerce Order status using the Order ID */
           if( result.status === "succeeded" ) {
             /* Clear My Shopping Cart */

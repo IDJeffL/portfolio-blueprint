@@ -4,8 +4,8 @@ import styles from './Basket.module.scss';
  * Stripe API Vars
  * ( this should be configured in the .env.local file )
  */
-const STRIPE_WOO_CK_CS_BASE64_AUTH_KEY='Y2tfOTM0Nzg0ZmUzYjZhMDJmZGY5N2FhZmQyNTY0MmU5YmVjZGNkN2FjYTpjc18zODFmNjQ3Y2NlY2M3MTk1YzdkYzcyOTMwMDA0ZDBmNGI4OWNhMGMz'
-const STRIPE_WOO_SITE_URL='https://trustpaytest.wpengine.com'
+const STRIPE_WOO_SITE_URL=process.env.NEXT_PUBLIC_STRIPE_WOO_SITE_URL
+const STRIPE_WOO_CK_CS_BASE64_AUTH_KEY=process.env.NEXT_PUBLIC_STRIPE_WOO_CK_CS_BASE64_AUTH_KEY
 
 /**
  * Basket.
@@ -279,13 +279,13 @@ export default function Basket( { localStorageName } ) {
                     "paddingBottom": "85px"
                   }}></div>
                 <hr 
-                  style={{"margin-top": "0"}}/>  
+                  style={{"marginTop": "0"}}/>  
                 {/* Basket Total */}
                 <table 
                   style={{
                     "border": "0",
                     "fontSize": "14px",
-                    "margin-bottom": "50px"
+                    "marginBottom": "50px"
                   }}>
                   <tbody>
                     <tr>
@@ -318,9 +318,7 @@ export default function Basket( { localStorageName } ) {
                           }}>Tax:</td>
                       <td>
                         <span id="totalCost">
-                          <img style={{'height':'20px'}} 
-                               src="./spin.webp" 
-                               alt="" />
+                          0.00
                         </span>
                       </td>
                     </tr>
@@ -331,9 +329,7 @@ export default function Basket( { localStorageName } ) {
                           }}>Total Payable:</td>
                       <td>
                         <span id="totalPayable">
-                          <img style={{'height':'20px'}} 
-                               src="./spin.webp" 
-                               alt="" />
+                          0.00
                         </span>
                       </td>
                     </tr> 
