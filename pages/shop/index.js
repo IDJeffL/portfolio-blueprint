@@ -39,7 +39,6 @@ import appConfig from 'app.config';
    } 
 
 export default function Page() { 
-
   const [pageIndex, setPageIndex] = useState(1);
   const [totalPages, setTotalPagesIndex] = useState(0);
 
@@ -75,8 +74,7 @@ export default function Page() {
                + '&page=' + pageIndex
                + '&orderby=id'
                + '&order=desc'
-
-    const { data } = useSWR( url + params, fetcher );  
+    const { data } = useSWR( url + params, fetcher );
 
     /* If there's no data to return */
     if ( data === undefined ) {
@@ -98,7 +96,7 @@ export default function Page() {
       /* Update Shopping Cart button text ( inc. items count ) */
       let shoppingCartItems = JSON.parse('[' + localStorage.getItem( 'MyShoppingCart' ) + ']')
       if ( ! shoppingCartItems || shoppingCartItems[0] === null ) {
-        shoppingCartItems.length = 0
+        shoppingCartItems.length = ''
       }
       document.getElementById( 'basketItemCount' ).innerHTML = shoppingCartItems.length
       /* Return products data */
@@ -212,9 +210,10 @@ export default function Page() {
       <Main>
         <EntryHeader title="Shop" />
         <div className="container">
+        <h6>Welcome to the WooCommerce Shop!</h6>
           <div>
             <p id="loading">
-              Loading, please wait...
+              Loading...
             </p>
               <div 
                 id="selectInfo" 

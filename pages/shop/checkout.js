@@ -60,6 +60,94 @@ export default function Page() {
   const footerMenu = data?.footerMenuItems?.nodes ?? [];
 
   /**
+   * Calculate cost of shipping fees and tax
+   * 
+   * The WooCommerce tax_id value is configured in,
+   * [WordPress-Domain]/wp-admin/admin.php?page=wc-settings&tab=tax&section=standard
+   */
+   function addShippingAndTax( subTotal = 0 ) {
+    let tax_id = 2
+    /* Headers */
+    let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Basic " + STRIPE_WOO_CK_CS_BASE64_AUTH_KEY);
+    /* Request Options */
+    let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+    };
+    /* Get data from WooCommerce */
+    fetch( STRIPE_WOO_SITE_URL + "/wp-json/wc/v3/taxes/" + tax_id, requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        result = JSON.parse(result)  
+        
+        let totalCost = 0
+        let subTotalWithTax = 0
+        let subTotalAndShippingWithTax = 0
+        let taxPercent = Number( result.rate ) / 100 
+
+        let allProducts = localStorage.getItem( 'MyShoppingCart' )
+            allProducts = JSON.parse('[' + allProducts + ']')
+
+        /* Step 1: Update subTotal costs with tax rate */
+        if ( result.shipping !== true ) {
+          subTotalWithTax = subTotal * Number( taxPercent )
+          totalCost = Number( subTotal )
+                    + Number( subTotalWithTax ).toFixed(2)
+
+          /* Assign total price to the Stripe amount */
+          const stripe = require('stripe')(STRIPE_SK_KEY);
+                stripe.paymentIntents.create({
+                  amount: ( totalCost.toFixed(2) * 100 ), /* Convert 700.00 to 70000 */
+                  currency: 'gbp',
+                  automatic_payment_methods: {enabled: true},
+                }).then((result) => {
+                  setID({'id':result.id })
+                  setItems({'clientSecret':result.client_secret,'appearance':{}})
+                })
+
+          /* Update total price on screen */
+          document.getElementById('totalCheckoutPrice').innerHTML = 'Total Cost: £' + totalCost.toFixed(2)
+        }
+
+        /* Step 2: Update total costs ( and Shipping ) with tax rate ( this is an optional setting ) */
+        if ( result.shipping === true ) {
+          /* Get data from WooCommerce */
+          let zone_id = 1 /* Shipping zone id */
+          let selectedShippingID = localStorage.getItem( 'selectedShippingRate' )
+          if ( Number( selectedShippingID ) ) {
+            fetch( STRIPE_WOO_SITE_URL + "/wp-json/wc/v3/shipping/zones/" + zone_id + "/methods/" + selectedShippingID, requestOptions)
+              .then(response => response.text())
+              .then(result => {
+                result = JSON.parse(result)
+                subTotalAndShippingWithTax = ( Number( subTotal ) + Number( result.settings.cost.value ) ) * Number( taxPercent )
+                totalCost = Number( subTotal ) 
+                          + Number( result.settings.cost.value ) 
+                          + Number( subTotalAndShippingWithTax )
+
+                /* Assign total price to the Stripe amount */
+                const stripe = require('stripe')(STRIPE_SK_KEY);
+                      stripe.paymentIntents.create({
+                        amount: ( totalCost.toFixed(2) * 100 ), /* Convert 700.00 to 70000 */
+                        currency: 'gbp',
+                        automatic_payment_methods: {enabled: true},
+                      }).then((result) => {
+                        setID({'id':result.id })
+                        setItems({'clientSecret':result.client_secret,'appearance':{}})
+                      })
+
+                /* Update total price on screen */
+                document.getElementById('totalCheckoutPrice').innerHTML = 'Total Cost: £' + totalCost.toFixed(2)
+              })
+              .catch(error => console.log('error', error)); 
+          }
+        }
+      })
+      .catch(error => console.log('error', error));  
+  }
+
+  /**
    * Create the Stripe options value param
    * ( required for processing payments )
    */
@@ -70,6 +158,7 @@ export default function Page() {
   // eslint-disable-next-line
   useEffect(() => {
     let cart = localStorage.getItem('MyShoppingCart')
+
     /* Get cart item ids */
     let cartItemIds = ''
     let cartItems = JSON.parse( '[' + cart + ']' )
@@ -102,18 +191,8 @@ export default function Page() {
             }
           }
         }
-        /* Update total price on screen */
-        document.getElementById('totalCheckoutPrice').innerHTML = 'Total Cost: £' + totalPrice.toFixed(2)
-        /* Assign total price to the Stripe amount */
-        const stripe = require('stripe')(STRIPE_SK_KEY);
-              stripe.paymentIntents.create({
-                amount: ( totalPrice * 100 ), /* Convert 700.00 to 70000 */
-                currency: 'gbp',
-                automatic_payment_methods: {enabled: true},
-              }).then((result) => {
-                setID({'id':result.id })
-                setItems({'clientSecret':result.client_secret,'appearance':{}})
-              })
+        /* Add shipping & tax cost */
+        addShippingAndTax( totalPrice.toFixed(2) )
       })
     
   },[]);
@@ -125,7 +204,7 @@ export default function Page() {
       <Main>
         <EntryHeader title="Shop" />
         <div className="container">
-          <h6>Payment ( Credit/Debit Card )</h6>
+          <h6>Stripe Payment ( Credit/Debit Card )</h6>
           <div 
             style={{"marginBottom":"20px"}}>
               <span id="totalCheckoutPrice">Loading...</span>

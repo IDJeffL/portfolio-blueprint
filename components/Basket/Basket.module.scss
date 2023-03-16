@@ -14,7 +14,7 @@
     display: inline-block;
     z-index: 9999;
     position: absolute;
-    top: 50px;
+    top: 95px;
     right: 30px;
     border: 1px solid black;
     min-height: 400px;
@@ -58,3 +58,22 @@
 .basketItemBin > img {
     width: 15px;
 }
+
+.basketShippingOption {
+    list-style-type: none;
+    margin-bottom: 0;
+}
+
+.basketShippingOption li {
+    margin-bottom: 0;
+}
+
+.basketRadioOption {
+    height: 14px !important;
+    opacity: 1 !important;
+    width: 15px !important;
+    margin-right: 5px !important;
+    position: relative !important;
+    margin-bottom: 0 !important;
+}
+

@@ -9,7 +9,7 @@ import styles from './CheckoutForm.module.scss';
  */
  const STRIPE_WOO_CK_CS_BASE64_AUTH_KEY='Y2tfOTM0Nzg0ZmUzYjZhMDJmZGY5N2FhZmQyNTY0MmU5YmVjZGNkN2FjYTpjc18zODFmNjQ3Y2NlY2M3MTk1YzdkYzcyOTMwMDA0ZDBmNGI4OWNhMGMz'
  const STRIPE_WOO_SITE_URL='https://trustpaytest.wpengine.com'
- const STRIPE_RETURN_URL='http://localhost:3000/shop/complete'
+ const STRIPE_RETURN_URL='https://hdxj0sc18jcxck49ro00bhabk.js.wpenginepowered.com/shop/complete'
  const STRIPE_SK_KEY='sk_test_51MhWNsG3zgRiYfgw5JPvCFl2YEwbVFkNokgu0a9cbczDg8J9JOYOtLThw2ZE3uqaXvSmejWLA82auflqHrrVsQCh00qO4U0pH5'
 
 /**
@@ -110,68 +110,84 @@ export default function CheckoutForm( id ) {
           line_items.push({"product_id": item, "quantity": val})
         })
 
-        /* Submit order details to WooCommerce ( order status isPending Payment ) */
         /* Headers */
         let myHeaders = new Headers()
             myHeaders.append("Content-Type", "application/json");
             myHeaders.append("Authorization", "Basic " + STRIPE_WOO_CK_CS_BASE64_AUTH_KEY);
-        /* Form Fields Content */
-        let formFieldsBilling = window.document.getElementsByClassName('billingField')
-        let formFieldsShipping = window.document.getElementsByClassName('shippingField')
-        /* Order Content */
-        let raw = JSON.stringify({
-          "payment_method": "stripe",
-          "payment_method_title": "Stripe",
-          "set_paid": false,
-          "needs_processing": false,
-          "billing": {
-            "first_name": formFieldsBilling["billing['first_name']"].value,
-            "last_name": formFieldsBilling["billing['last_name']"].value,
-            "address_1": formFieldsBilling["billing['address_1']"].value,
-            "address_2": formFieldsBilling["billing['address_2']"].value,
-            "city": formFieldsBilling["billing['city']"].value,
-            "state": formFieldsBilling["billing['state']"].value,
-            "postcode": formFieldsBilling["billing['postcode']"].value,
-            "country": formFieldsBilling["billing['country']"].value,
-            "email": formFieldsBilling["billing['email']"].value,
-            "phone": formFieldsBilling["billing['phone']"].value,
-          },
-          "shipping": {
-            "first_name": formFieldsShipping["shipping['first_name']"].value,
-            "last_name": formFieldsShipping["shipping['last_name']"].value,
-            "address_1": formFieldsShipping["shipping['address_1']"].value,
-            "address_2": formFieldsShipping["shipping['address_2']"].value,
-            "city": formFieldsShipping["shipping['city']"].value,
-            "state": formFieldsShipping["shipping['state']"].value,
-            "postcode": formFieldsShipping["shipping['postcode']"].value,
-            "country": formFieldsShipping["shipping['country']"].value,
-          },
-          "line_items":line_items,
-          "shipping_lines": [
-            {
-              "method_id": "flat_rate",
-              "method_title": "Flat Rate",
-              "total": "1.99"
-            }
-          ]
-        });
 
-        /* Request Options */
-        let requestOptions = {
-            method: 'POST',
+        /* Get shipping cost */
+        let zone_id = 1 /* Shipping zone id */
+        let selectedShippingID = localStorage.getItem( 'selectedShippingRate' )
+        if ( Number( selectedShippingID ) ) {
+          /* Request Options */
+          let requestOptions = {
+            method: 'GET',
             headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-        /* Save Order to WooCommerce */
-        fetch( STRIPE_WOO_SITE_URL + "/wp-json/wc/v3/orders", requestOptions)
-          .then(response => response.text())
-          .then(result => {
-            let data = JSON.parse(result)
-            // Update Order with Custom Values
-            updateCustomValues( pi_ID, data.order_key, data.id )
-          })
-          .catch(error => console.log('error', error));  
+          };
+          fetch( STRIPE_WOO_SITE_URL + "/wp-json/wc/v3/shipping/zones/" + zone_id + "/methods/" + selectedShippingID, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+              result = JSON.parse(result)
+              /* Submit order details to WooCommerce ( order status isPending Payment ) */
+              /* Form Fields Content */
+              let formFieldsBilling = window.document.getElementsByClassName('billingField')
+              let formFieldsShipping = window.document.getElementsByClassName('shippingField')
+              /* Order Content */
+              let raw = JSON.stringify({
+                "payment_method": "stripe",
+                "payment_method_title": "Stripe",
+                "set_paid": false,
+                "needs_processing": false,
+                "billing": {
+                  "first_name": formFieldsBilling["billing['first_name']"].value,
+                  "last_name": formFieldsBilling["billing['last_name']"].value,
+                  "address_1": formFieldsBilling["billing['address_1']"].value,
+                  "address_2": formFieldsBilling["billing['address_2']"].value,
+                  "city": formFieldsBilling["billing['city']"].value,
+                  "state": formFieldsBilling["billing['state']"].value,
+                  "postcode": formFieldsBilling["billing['postcode']"].value,
+                  "country": formFieldsBilling["billing['country']"].value,
+                  "email": formFieldsBilling["billing['email']"].value,
+                  "phone": formFieldsBilling["billing['phone']"].value,
+                },
+                "shipping": {
+                  "first_name": formFieldsShipping["shipping['first_name']"].value,
+                  "last_name": formFieldsShipping["shipping['last_name']"].value,
+                  "address_1": formFieldsShipping["shipping['address_1']"].value,
+                  "address_2": formFieldsShipping["shipping['address_2']"].value,
+                  "city": formFieldsShipping["shipping['city']"].value,
+                  "state": formFieldsShipping["shipping['state']"].value,
+                  "postcode": formFieldsShipping["shipping['postcode']"].value,
+                  "country": formFieldsShipping["shipping['country']"].value,
+                },
+                "line_items":line_items,
+                "shipping_lines": [
+                  {
+                    "method_id": result.method_id,
+                    "method_title": result.method_title,
+                    "total": result.settings.cost.value
+                  }
+                ]
+              });
+
+              /* Request Options */
+              requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+              };
+              /* Save Order to WooCommerce */
+              fetch( STRIPE_WOO_SITE_URL + "/wp-json/wc/v3/orders", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                  let data = JSON.parse(result)
+                  /* Update Order with Custom Values */
+                  updateCustomValues( pi_ID, data.order_key, data.id )
+                })
+                .catch(error => console.log('error', error));  
+            })
+        }
       }
     })
 

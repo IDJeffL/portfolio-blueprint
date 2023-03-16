@@ -1,11 +1,16 @@
-
 import styles from './Basket.module.scss';
+
+/**
+ * Stripe API Vars
+ * ( this should be configured in the .env.local file )
+ */
+const STRIPE_WOO_CK_CS_BASE64_AUTH_KEY='Y2tfOTM0Nzg0ZmUzYjZhMDJmZGY5N2FhZmQyNTY0MmU5YmVjZGNkN2FjYTpjc18zODFmNjQ3Y2NlY2M3MTk1YzdkYzcyOTMwMDA0ZDBmNGI4OWNhMGMz'
+const STRIPE_WOO_SITE_URL='https://trustpaytest.wpengine.com'
 
 /**
  * Basket.
  */
 export default function Basket( { localStorageName } ) {
-
   /**
    * Toggle shopping cart content
    */
@@ -20,6 +25,125 @@ export default function Basket( { localStorageName } ) {
       /* Hide basket */
       x.style.display = "none"
     }
+    /* Add shipping zone choices to Shopping Cart */
+    shippingZones()
+  }
+
+  /**
+   * Get Shipping fees options
+   * 
+   * The WooCommerce shipping zone_id value is configured in,
+   * [WordPress-Domain]/wp-admin/admin.php?page=wc-settings&tab=shipping
+   */
+  function shippingZones() {
+    let zone_id = 1
+    /* Headers */
+    let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Basic " + STRIPE_WOO_CK_CS_BASE64_AUTH_KEY);
+    /* Request Options */
+    let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+    };
+    /* Get data from WooCommerce */
+    fetch( STRIPE_WOO_SITE_URL + "/wp-json/wc/v3/shipping/zones/" + zone_id + "/methods", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        result = JSON.parse(result)
+        let currency = '&pound;'
+        let options = '<ul class=' + styles.basketShippingOption + '>'
+        {result?.map((r, i) => {
+          let checked = ''
+          if ( i === 0 ) {
+            checked = ' checked '
+          }
+          options+= '<li><input ' + checked + ' class="' + styles.basketRadioOption + '" type="radio" id="shippingOption" name="shippingOption" value="' + r.id + '">' + r.title + ' (' + currency + r.settings.cost.value + ')</li>'
+        })}
+        options+= '</ul>'
+        document.getElementById( 'shippingOptions' ).innerHTML = options
+      })
+      .catch(error => console.log('error', error)); 
+  }
+
+  /**
+   * Calculate total cost of order products, shipping fees and tax
+   * 
+   * The WooCommerce tax_id value is configured in,
+   * [WordPress-Domain]/wp-admin/admin.php?page=wc-settings&tab=tax&section=standard
+   */
+  function totalCost() {
+    let tax_id = 2
+    /* Headers */
+    let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Basic " + STRIPE_WOO_CK_CS_BASE64_AUTH_KEY);
+    /* Request Options */
+    let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+    };
+    /* Get data from WooCommerce */
+    fetch( STRIPE_WOO_SITE_URL + "/wp-json/wc/v3/taxes/" + tax_id, requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        result = JSON.parse(result)
+        
+        let subTotal = 0       
+        let subTotalWithTax = 0 
+        let subTotalAndShippingWithTax = 0
+        let taxPercent = Number( result.rate ) / 100 
+        let allProducts = localStorage.getItem( localStorageName )
+            allProducts = JSON.parse('[' + allProducts + ']')
+
+        /* Step 1: Update subTotal costs with tax rate */
+        if ( result.shipping !== true ) {
+          for ( let i = 0; i < allProducts.length; i++ ) {
+            subTotal = subTotal + Number( allProducts[i].price )
+            subTotalWithTax = subTotal * Number( taxPercent )
+            document.getElementById( 'totalCost' ).innerHTML = currency + subTotalWithTax.toFixed(2)
+          } 
+        }
+
+        /* Step 2: Update total costs ( and Shipping ) with tax rate ( this is an optional setting ) */
+        if ( result.shipping === true ) {
+          /* Get data from WooCommerce */
+          let zone_id = 1 /* Shipping zone id */
+          let selectedShippingID = document.querySelector('input[name="shippingOption"]:checked').value; /* Selected shipping id */
+          if ( Number( selectedShippingID ) ) {
+            fetch( STRIPE_WOO_SITE_URL + "/wp-json/wc/v3/shipping/zones/" + zone_id + "/methods/" + selectedShippingID, requestOptions)
+              .then(response => response.text())
+              .then(result => {
+                result = JSON.parse(result)
+                for ( let i = 0; i < allProducts.length; i++ ) {
+                  subTotal = subTotal + Number( allProducts[i].price )
+                } 
+                subTotalAndShippingWithTax = ( Number( subTotal ) + Number( result.settings.cost.value ) ) * Number( taxPercent )
+                document.getElementById( 'totalCost' ).innerHTML = currency + subTotalAndShippingWithTax.toFixed(2)
+                /* Update total payable */
+                totalPayable( 
+                  Number( subTotal ) 
+                  + Number( result.settings.cost.value ) 
+                  + Number( subTotalAndShippingWithTax.toFixed(2) ) 
+                )
+              })
+              .catch(error => console.log('error', error)); 
+          }
+        }
+      })
+      .catch(error => console.log('error', error));     
+
+    let currency = '&pound;'
+    document.getElementById( 'totalCost' ).innerHTML = '<img style="height: 20px;" src="./spin.webp">'
+    document.getElementById( 'totalPayable' ).innerHTML = '<img style="height: 20px;" src="./spin.webp">'
+  }
+
+  /**
+   * Display the total payable
+   */
+  function totalPayable( total = '0.00' ) {
+    let currency = '&pound;'
+    document.getElementById( 'totalPayable' ).innerHTML = currency + Number( total ).toFixed(2)
   }
 
   /**
@@ -79,6 +203,8 @@ export default function Basket( { localStorageName } ) {
           break
         }
       }
+      /* Update selected shipping rate */
+      updateSelectedShippingRate()
     });
 
     /* Return items */
@@ -86,9 +212,27 @@ export default function Basket( { localStorageName } ) {
   }
 
   /**
+   * Update selected shipping rate
+   */
+  function updateSelectedShippingRate() {
+
+    let selectedShippingID = ( document.querySelector('input[name="shippingOption"]') !== null ) 
+                               ? document.querySelector('input[name="shippingOption"]:checked').value 
+                               : 4 /* Set default shipping id */
+
+    localStorage.setItem( 'selectedShippingRate', selectedShippingID );
+
+    /* Update total cost */
+    totalCost()
+  }  
+
+  /**
    * Proceed to checkout
    */
   function proceedToCheckout() {
+    /* Close cart window */
+    toggleShoppingCartContent()
+    /* Redirect to checkout */
     window.location.assign( './shop/checkout' )
   }
 
@@ -134,17 +278,67 @@ export default function Basket( { localStorageName } ) {
                   style={{
                     "paddingBottom": "85px"
                   }}></div>
+                <hr 
+                  style={{"margin-top": "0"}}/>  
                 {/* Basket Total */}
-                <div
+                <table 
                   style={{
-                    "width": "100%",
-                    "position": "absolute",
-                    "bottom": "50px",
-                    "right": "32px",
-                    "textAlign": "right",
-                    }}>
-                  Cart Total: <span id="basketTotal">0.00</span>
-                </div>
+                    "border": "0",
+                    "fontSize": "14px",
+                    "margin-bottom": "50px"
+                  }}>
+                  <tbody>
+                    <tr>
+                      <td 
+                        style={{
+                          'padding': '0'
+                          }}>Subtotal:</td>
+                      <td>
+                        <span id="basketTotal">0.00</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td 
+                        style={{
+                          'padding': '0',
+                          "verticalAlign": "text-top",
+                        }}>Shipping:</td>
+                      <td>
+                        <span id="shippingOptions">
+                          <img style={{'height':'20px'}} 
+                               src="./spin.webp" 
+                               alt="" />
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style={{
+                          'padding': '0'
+                          }}>Tax:</td>
+                      <td>
+                        <span id="totalCost">
+                          <img style={{'height':'20px'}} 
+                               src="./spin.webp" 
+                               alt="" />
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style={{
+                          'padding': '0'
+                          }}>Total Payable:</td>
+                      <td>
+                        <span id="totalPayable">
+                          <img style={{'height':'20px'}} 
+                               src="./spin.webp" 
+                               alt="" />
+                        </span>
+                      </td>
+                    </tr> 
+                  </tbody>               
+                </table>
                 {/* Proceed to Checkout */}
                 <div 
                   style={{

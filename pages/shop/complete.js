@@ -46,6 +46,9 @@ setTimeout(function() {
   const stripe = require('stripe')(STRIPE_SK_KEY);
   const paymentIntent = stripe.paymentIntents.retrieve( paymentIntentInUrl )
         paymentIntent.then(function(result) {
+          console.log( result )
+
+
           /* If result status is "succeeded" then update the WooCommerce Order status using the Order ID */
           if( result.status === "succeeded" ) {
             /* Clear My Shopping Cart */
@@ -120,7 +123,7 @@ export default function Page() {
 
           {/* Order details loading */}
           <div id="paymentLoading">
-            Loading purchase details, please wait...
+            Loading...
           </div>
 
           {/* Order details loaded */}
@@ -144,7 +147,7 @@ export default function Page() {
             {/* Order total */}
             <hr />
             <div>
-              <span className={styles.paymentConfirmedTitle}>Paid Total: 
+              <span className={styles.paymentConfirmedTitle}>Total Paid: 
                 <span className="paymentCurrency" 
                       style={{"float":"right"}}></span>
               </span>
