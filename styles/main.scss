@@ -9,3 +9,8 @@
 @import 'Grid';
 @import 'Utility';
 @import 'Gutenberg';
+
+// Custom CSS 
+.accordion-item h2 {
+    margin: 0 !important;
+}
