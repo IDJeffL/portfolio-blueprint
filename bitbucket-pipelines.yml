@@ -13,4 +13,3 @@ pipelines:
               variables:
                 WPE_SSHG_KEY_PRIVATE: $WPE_SSHG_KEY_PRIVATE
                 WPE_ENV: "portfolioblue"
-           
