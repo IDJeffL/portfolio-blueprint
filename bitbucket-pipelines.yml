@@ -9,4 +9,10 @@ pipelines:
           name: Deploy to Production
           script:
             - echo 'testing 123 ... ' >> Foo.txt
+            - git add --update WP-UPDATE-REQUEST.txt
+            - git commit -m "WP Update Request [skip ci]"
+            - git push
             - echo $WPE_SSHG_KEY_PRIVATE >> Foo.txt
+            - git add --update WP-UPDATE-REQUEST.txt
+            - git commit -m "WP Update Request [skip ci]"
+            - git push
