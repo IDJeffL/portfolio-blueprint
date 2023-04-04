@@ -12,7 +12,3 @@ pipelines:
               variables:
                 WPE_SSHG_KEY_PRIVATE: $WPE_SSHG_KEY_PRIVATE
                 WPE_ENV: "portfolioblue"
-            - echo "" >> WP-UPDATE-REQUEST.txt
-            - git add --update WP-UPDATE-REQUEST.txt
-            - git commit -m "WP Update Request [skip ci]"
-            - git push
