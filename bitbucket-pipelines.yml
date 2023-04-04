@@ -11,3 +11,7 @@ pipelines:
             - git add --update WP-UPDATE-REQUEST.txt
             - git commit -m "WP Update Request [skip ci]"
             - git push
+            - pipe: wpengine/wpe-site-deploy:v1
+              variables:
+                WPE_SSHG_KEY_PRIVATE: $WPE_SSHG_KEY_PRIVATE
+                WPE_ENV: "portfolioblue"
