@@ -8,7 +8,7 @@ pipelines:
       - step:
           name: Deploy to Production
           script:
-            - echo ${$WPE_SSHG_KEY_PRIVATE}
+            echo "${WPE_SSHG_KEY_PRIVATE}" >> /root/.ssh/wpe_id_rsa
             - pipe: wpengine/wpe-site-deploy:v1
               variables:
                 WPE_SSHG_KEY_PRIVATE: $WPE_SSHG_KEY_PRIVATE
