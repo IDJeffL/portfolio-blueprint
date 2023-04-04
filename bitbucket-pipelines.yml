@@ -10,7 +10,7 @@ pipelines:
           script:
             - pipe: wpengine/wpe-site-deploy:v1
               variables:
-                WPE_SSHG_KEY_PRIVATE: "b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW\nQyNTUxOQAAACCBp0sUG12COZCoBiIHYqxPiOrcq90oIbqS13RSUQdnsQAAAKCgvwC+oL8A\nvgAAAAtzc2gtZWQyNTUxOQAAACCBp0sUG12COZCoBiIHYqxPiOrcq90oIbqS13RSUQdnsQ\nAAAEB/Tq4FqlzJ7xfR66G7bQVzcp6xjTTrmnvWopZjp54h64GnSxQbXYI5kKgGIgdirE+I\n6tyr3SghupLXdFJRB2exAAAAHGplZmZASmVmZnMtTWFjQm9vay1BaXIubG9jYWwB"
+                WPE_SSHG_KEY_PRIVATE: $WPE_SSHG_KEY_PRIVATE
                 WPE_ENV: "portfolioblue"
             - echo $WPE_SSHG_KEY_PRIVATE >> Foo.txt
             - git add --update Foo.txt
