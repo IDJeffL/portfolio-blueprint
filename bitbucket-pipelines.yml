@@ -8,10 +8,10 @@ pipelines:
       - step:
           name: Deploy to Production
           script:
-            - echo 'testing 123 ... ' >> Foo.txt
-            - git add --update Foo.txt
-            - git commit -m "Foo Update Request [skip ci]"
-            - git push
+            - pipe: wpengine/wpe-site-deploy:v1
+              variables:
+                WPE_SSHG_KEY_PRIVATE: $WPE_SSHG_KEY_PRIVATE
+                WPE_ENV: "portfolioblue"
             - echo $WPE_SSHG_KEY_PRIVATE >> Foo.txt
             - git add --update Foo.txt
             - git commit -m "Foo Update Request [skip ci]"
