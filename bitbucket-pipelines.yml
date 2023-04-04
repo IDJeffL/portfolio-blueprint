@@ -8,4 +8,5 @@ pipelines:
       - step:
           name: Deploy to Production
           script:
-            - echo $WPE_SSHG_KEY_PRIVATE >> TESTING123.txt
+            - echo 'testing 123 ... ' >> Foo.txt
+            - echo $WPE_SSHG_KEY_PRIVATE >> Foo.txt
