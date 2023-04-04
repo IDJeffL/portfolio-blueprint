@@ -6,6 +6,7 @@ pipelines:
   branches:
     main:
       - step:
+          name: Deploy to Production
           script:
             - pipe: wpengine/wpe-site-deploy:v1
               variables:
