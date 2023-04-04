@@ -1,13 +1,15 @@
 # Update WP-UPDATE-REQUEST.txt file so remote servers (eg. WP ENGINE / Vercel ) can detect and rebuild/update headless
 
-image: node:16 
+image: node:16
 
-pipelines:  
-  default:
-    - step:
-        script:
-           - mkdir -p ~/.ssh
-           - cat my_known_hosts >> ~/.ssh/known_hosts
-           - (umask  077 ; echo $MY_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
-           - ssh <user>@<host> 'echo "connected to `host` as $USER"'
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy to Production
+          script:
+            - pipe: wpengine/wpe-site-deploy:v1
+              variables:
+                WPE_SSHG_KEY_PRIVATE: $WPE_SSHG_KEY_PRIVATE
+                WPE_ENV: "portfolioblue"
            
