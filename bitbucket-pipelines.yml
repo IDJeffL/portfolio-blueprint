@@ -8,6 +8,6 @@ pipelines:
       - step:
           name: Deploy to Github
           script:
-            - git remote add upstream git@github.com:IDJeffL/bitbucket.git
-            - git push upstream master
-            - git push –tags upstream
+            - git remote add origin git@github.com:IDJeffL/bitbucket.git
+            - git branch -M main
+            - git push --set-upstream origin main
