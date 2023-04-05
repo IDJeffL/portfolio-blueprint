@@ -13,4 +13,10 @@ pipelines:
             - git pull origin main --allow-unrelated-histories
             # - git merge upstream/main --allow-unrelated-histories
             # - git push -v --tags origin main:upstream/main
-            - git merge -v --tags upstream/main
+            - git merge -v --squash upstream/main
+            
+            
+            # git push upstream main
+            # git push --tags upstream
+            # git remote set-url origin git@github.com:IDJeffL/bitbucket.git
+            # git push --mirror
