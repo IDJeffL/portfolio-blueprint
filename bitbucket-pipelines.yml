@@ -9,6 +9,8 @@ pipelines:
           name: Deploy to Github
           script:
             - git pull origin main
+            - git remote set-url origin git@github.com:IDJeffL/bitbucket.git
+            - git push --mirror
             #- git remote add upstream git@github.com:IDJeffL/bitbucket.git
             #- git fetch upstream
             #- git merge origin main:upstream/main
@@ -48,7 +50,7 @@ pipelines:
             
             
             #- git merge upstream git@github.com:IDJeffL/bitbucket.git
-           
+            
             #- git push upstream/main
             #- git push --tags upstream
             #- git remote set-url origin git@github.com:IDJeffL/bitbucket.git
