@@ -8,8 +8,10 @@ pipelines:
       - step:
           name: Deploy to Github
           script:
+            - git remote -v
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
             - git fetch upstream
+            - git pull
             - git push --force upstream main:main
             #- git pull origin main
             #- git merge upstream/main --hard --allow-unrelated-histories
