@@ -8,5 +8,6 @@ pipelines:
       - step:
           name: Deploy to Github
           script:
-             - git remote add sync git@github.com:IDJeffL/bitbucket.git
-             - git push -u -f sync main
+            - git remote add upstream git@github.com:IDJeffL/bitbucket.git
+            - git push upstream main
+            - git push –tags upstream
