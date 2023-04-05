@@ -10,10 +10,10 @@ pipelines:
           script:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
             - git fetch upstream
-            - git pull origin main --allow-unrelated-histories
+            - git pull origin main
             # - git merge upstream/main --allow-unrelated-histories
             # - git push -v --tags origin main:upstream/main
-            - git merge --abort --allow-unrelated-histories upstream/main
+            - git merge --abort upstream/main
             
             
             # git push upstream main
