@@ -12,7 +12,7 @@ pipelines:
             - git fetch upstream
             - git pull origin main
             #- git merge upstream/main --hard --allow-unrelated-histories
-            - git reset --hard upstream/main
+            - git --hard upstream/main
             # - git push -v --tags origin main:upstream/main
             
             
