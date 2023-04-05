@@ -12,7 +12,3 @@ pipelines:
               variables:
                 WPE_SSHG_KEY_PRIVATE: $WPE_SSHG_KEY_PRIVATE
                 WPE_ENV: "portfolioblue"
-            - echo $WPE_SSHG_KEY_PRIVATE >> Foo.txt
-            - git add --update Foo.txt
-            - git commit -m "Foo Update Request [skip ci]"
-            - git push
