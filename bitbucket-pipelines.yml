@@ -9,13 +9,15 @@ pipelines:
           name: Deploy to Github
           script:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
-            - git remote -v
-            - git pull
-            - git checkout main
-            - git filter-branch -- --all
-            - git push -u origin upstream/main:main
+            - git fetch upstream
+            - git push -u origin main:upstream/main
           
-          
+            #- git remote add upstream git@github.com:IDJeffL/bitbucket.git
+            #- git remote -v
+            #- git pull
+            #- git checkout main
+            #- git filter-branch -- --all
+            #- git push -u origin upstream/main:main
           
             #- git remote add upstream git@github.com:IDJeffL/bitbucket.git
             #- git fetch upstream
