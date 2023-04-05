@@ -9,7 +9,5 @@ pipelines:
           name: Deploy to Github
           script:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
-            - git fetch upstream
-            - git checkout main
-            - git pull upstream/main --allow-unrelated-histories
+            - git fetch upstream --allow-unrelated-histories
             - git merge upstream/main
