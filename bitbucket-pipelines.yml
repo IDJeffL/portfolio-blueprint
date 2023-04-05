@@ -9,7 +9,7 @@ pipelines:
           name: Deploy to Github
           script:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
-            - git fetch upstream
+            - git fetch --unshallow upstream
             - git push --force -u upstream main:main
             
           
