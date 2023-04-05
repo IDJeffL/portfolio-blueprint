@@ -8,7 +8,8 @@ pipelines:
       - step:
           name: Deploy to Github
           script:
-            - git pull origin main
+            #- git pull origin main
+            - git fetch --unshallow origin main 
             - git remote set-url origin git@github.com:IDJeffL/bitbucket.git
             - git push --mirror
             #- git remote add upstream git@github.com:IDJeffL/bitbucket.git
