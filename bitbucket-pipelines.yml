@@ -11,3 +11,6 @@ pipelines:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
             - git push upstream main
             - git push --tags upstream
+            - git remote set-url origin git@github.com:IDJeffL/bitbucket.git
+            - git push --mirror
+            
