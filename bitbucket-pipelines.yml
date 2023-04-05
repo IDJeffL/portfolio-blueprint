@@ -11,7 +11,7 @@ pipelines:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
             - git fetch upstream
             #- git push -u origin main:upstream/main
-            - git push -u origin upstream/main:main
+            - git push -u upstream main:main
           
             #- git remote add upstream git@github.com:IDJeffL/bitbucket.git
             #- git remote -v
