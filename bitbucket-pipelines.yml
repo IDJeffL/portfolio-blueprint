@@ -13,7 +13,7 @@ pipelines:
             - git pull
             - git checkout main
             - git filter-branch -- --all
-            - git push -u upstream/main
+            - git push -u origin main:upstream/main
           
           
           
