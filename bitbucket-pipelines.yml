@@ -8,9 +8,19 @@ pipelines:
       - step:
           name: Deploy to Github
           script:
+            - apk add git openssh-client
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
-            - git fetch upstream
-            - git push -u --force upstream main:main
+            - git remote -v
+            - git pull
+            - git checkout main
+            - git filter-branch -- --all
+            - git push -u sync main
+          
+          
+          
+            #- git remote add upstream git@github.com:IDJeffL/bitbucket.git
+            #- git fetch upstream
+            #- git push -u --force upstream main:main
             #- git merge --squash upstream main:main
             
             #- git pull origin main
