@@ -9,8 +9,8 @@ pipelines:
           name: Deploy to Github
           script:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
-            - git fetch upstream/main
-            - git merge origin/main
+            - git fetch upstream
+            - git merge origin main:main
           
           
           
