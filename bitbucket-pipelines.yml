@@ -8,7 +8,6 @@ pipelines:
       - step:
           name: Deploy to Github
           script:
-            - apk add git openssh-client
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
             - git remote -v
             - git pull
