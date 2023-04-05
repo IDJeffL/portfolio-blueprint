@@ -11,5 +11,4 @@ pipelines:
              - git remote add sync git@github.com:IDJeffL/bitbucket.git
              - git checkout main
              - git pull 
-             - git rebase main
              - git push sync main
