@@ -10,7 +10,6 @@ pipelines:
           script:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
             - git fetch upstream
-            - git branch --set-upstream-to upstream/main
             - git push -u upstream main:main
             
           
