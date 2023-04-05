@@ -9,5 +9,6 @@ pipelines:
           name: Deploy to Github
           script:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
+            - git pull
             - git push upstream main
             - git push --tags upstream
