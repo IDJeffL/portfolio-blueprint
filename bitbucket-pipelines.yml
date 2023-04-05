@@ -8,7 +8,7 @@ pipelines:
       - step:
           name: Deploy to Github
           script:
-            -  git fetch --unshallow git@bitbucket.org:illustratedevelopment/headless-site.git
+            -  git fetch git@bitbucket.org:illustratedevelopment/headless-site.git
             -  git remote remove origin
             -  git init
             -  git remote add origin git@github.com:IDJeffL/bitbucket.git
