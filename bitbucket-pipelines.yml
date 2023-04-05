@@ -8,7 +8,8 @@ pipelines:
       - step:
           name: Deploy to Github
           script:
-             - git remote add sync git@github.com:IDJeffL/bitbucket.git
-             - git checkout main
-             - git pull 
-             - git push sync main
+             - git init
+             - git add -A
+             - git commit -m 'Added my project'
+             - git remote add origin git@github.com:IDJeffL/bitbucket.git
+             - git push -u -f origin main
