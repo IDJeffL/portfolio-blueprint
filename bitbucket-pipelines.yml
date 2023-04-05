@@ -12,4 +12,5 @@ pipelines:
             - git fetch upstream
             - git pull origin main --allow-unrelated-histories
             # - git merge upstream/main --allow-unrelated-histories
-            - git push -v --tags origin main:upstream/main
+            # - git push -v --tags origin main:upstream/main
+            - git push -v --tags upstream/main
