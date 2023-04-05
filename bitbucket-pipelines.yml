@@ -13,7 +13,7 @@ pipelines:
             - git pull origin main
             #- git merge upstream/main --hard --allow-unrelated-histories
             #- git merge --squash --allow-unrelated-histories upstream/main
-            - git merge --allow-unrelated-histories -s ours upstream/main
+            - git merge --allow-unrelated-histories -s theirs upstream/main
             # - git push -v --tags origin main:upstream/main
             
             
