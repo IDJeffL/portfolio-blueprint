@@ -1,4 +1,5 @@
-# Update WP-UPDATE-REQUEST.txt file so remote servers (eg. WP ENGINE / Vercel ) can detect and rebuild/update headless
+# 1. Update WP-UPDATE-REQUEST.txt file so remote servers (eg. WP ENGINE / Vercel ) can detect and rebuild/update headless
+# 2. Update Github repo with any file editing in this Bitbucket project.
 
 image: node:16
 
