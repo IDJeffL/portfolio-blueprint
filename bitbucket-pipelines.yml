@@ -11,5 +11,5 @@ pipelines:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
             - git fetch upstream
             - git checkout main
-            - git pull main --allow-unrelated-histories
+            - git pull upstream/main --allow-unrelated-histories
             - git merge upstream/main
