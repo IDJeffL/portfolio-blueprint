@@ -14,6 +14,7 @@ pipelines:
             #- git merge upstream/main --hard --allow-unrelated-histories
             #- git merge --squash --allow-unrelated-histories upstream/main
             - git merge --allow-unrelated-histories origin main
+            - git merge --allow-unrelated-histories upstream/main
             # - git push -v --tags origin main:upstream/main
             
             
