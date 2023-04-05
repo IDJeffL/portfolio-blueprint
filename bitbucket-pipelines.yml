@@ -6,9 +6,9 @@ pipelines:
   branches:
     main:
       - step:
-          name: Deploy to Production
+          name: Deploy to Github
           script:
-            - pipe: wpengine/wpe-site-deploy:v1
-              variables:
-                WPE_SSHG_KEY_PRIVATE: $WPE_SSHG_KEY_PRIVATE
-                WPE_ENV: "portfolioblue"
+             - git remote add sync git@github.com:IDJeffL/bitbucket.git
+             - git checkout dev
+             - git pull    
+             - git push sync dev
