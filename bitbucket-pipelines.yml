@@ -9,7 +9,7 @@ pipelines:
           name: Deploy to Github
           script:
              - git remote add sync git@github.com:IDJeffL/bitbucket.git
-             - git pull
              - git checkout main
-             - git pull    
+             - git pull 
+             - git rebase main
              - git push sync main
