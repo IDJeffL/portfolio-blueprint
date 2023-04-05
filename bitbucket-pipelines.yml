@@ -10,7 +10,8 @@ pipelines:
           script:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
             - git fetch upstream
-            - git pull origin main
+            - git push upstream main:main
+            #- git pull origin main
             #- git merge upstream/main --hard --allow-unrelated-histories
             #- git merge --squash --allow-unrelated-histories upstream/main
             #- git merge --allow-unrelated-histories origin main
@@ -20,7 +21,7 @@ pipelines:
             
             #- git merge upstream git@github.com:IDJeffL/bitbucket.git
            
-            - git push upstream/main
-            - git push --tags upstream
-            - git remote set-url origin git@github.com:IDJeffL/bitbucket.git
-            - git push --mirror
+            #- git push upstream/main
+            #- git push --tags upstream
+            #- git remote set-url origin git@github.com:IDJeffL/bitbucket.git
+            #- git push --mirror
