@@ -10,7 +10,7 @@ pipelines:
           script:
             - git remote add upstream git@github.com:IDJeffL/bitbucket.git
             - git fetch upstream
-            - git merge upstream main:main
+            - git merge origin main:upstream/main
           
           
           
