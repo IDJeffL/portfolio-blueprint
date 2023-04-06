@@ -10,5 +10,5 @@ pipelines:
           name: Deploy to Github
           script:
             - git fetch --unshallow origin main 
-            - git remote set-url origin git@github.com:IDJeffL/bitbucket.git
+            - git remote set-url origin git@github.com:IDJeffL/portfolio-blueprint.git
             - git push --mirror
